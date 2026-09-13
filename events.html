@@ -7,54 +7,45 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Arial,sans-serif;background:#f4f4f4;color:#333;}
+body{font-family:Arial,sans-serif;background:#f4f4f4;}
+header{background:#006400;color:white;text-align:center;padding:20px;}
+header h1{color:gold;}
 
-header{
-background:#006400;
-color:white;
-text-align:center;
-padding:25px;
-}
-
-nav{
+.menu{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:8px;
 background:#004d00;
 padding:10px;
-text-align:center;
 }
-
-nav a{
+.menu a{
+background:#008000;
 color:white;
 text-decoration:none;
-margin:5px;
-display:inline-block;
 padding:8px 12px;
-background:#008000;
 border-radius:5px;
-font-size:14px;
+font-size:13px;
 }
 
-.container{
-width:90%;
-max-width:1000px;
-margin:20px auto;
-}
+.container{padding:20px;}
 
 .event{
 background:white;
-padding:20px;
+padding:18px;
 margin-bottom:20px;
-border-left:6px solid gold;
 border-radius:10px;
 box-shadow:0 2px 8px rgba(0,0,0,.15);
+border-left:6px solid #006400;
 }
 
 .event h2{
 color:#006400;
-margin-bottom:10px;
+margin-bottom:8px;
 }
 
 .date{
-color:#d35400;
+color:red;
 font-weight:bold;
 margin-bottom:10px;
 }
@@ -64,7 +55,7 @@ background:#006400;
 color:white;
 text-align:center;
 padding:20px;
-margin-top:30px;
+margin-top:20px;
 }
 </style>
 </head>
@@ -72,54 +63,49 @@ margin-top:30px;
 <body>
 
 <header>
-<h1>IDRIS HK 2027 CAMPAIGN EVENTS</h1>
-<p>Kogi East Senatorial District</p>
+<h1>IDRIS HK 2027</h1>
+<p>Campaign Events & Schedule</p>
 </header>
 
-<nav>
+<div class="menu">
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
 <a href="gallery.html">Gallery</a>
 <a href="news.html">News</a>
+<a href="events.html">Events</a>
 <a href="contact.html">Contact</a>
-</nav>
+</div>
 
 <div class="container">
 
 <div class="event">
-<div class="date">20 September 2026</div>
-<h2>Town Hall Meeting – Ibaji LGA</h2>
-<p>Meeting with community leaders, youths, women, and stakeholders to discuss development priorities in Ibaji.</p>
+<h2>Town Hall Meeting</h2>
+<p class="date">September 2026</p>
+<p>Interactive meeting with community leaders, women groups, youths, and stakeholders across Kogi East.</p>
 </div>
 
 <div class="event">
-<div class="date">27 September 2026</div>
-<h2>Youth Empowerment Forum – Dekina</h2>
-<p>An interactive programme focused on youth development, education, and employment opportunities.</p>
+<h2>Grassroots Campaign Tour</h2>
+<p class="date">Across the 9 LGAs of Kogi East</p>
+<p>Visits to Ibaji, Idah, Dekina, Ankpa, Bassa, Ofu, Olamaboro, Omala, and Igalamela/Odolu.</p>
 </div>
 
 <div class="event">
-<div class="date">5 October 2026</div>
-<h2>Community Outreach – Idah</h2>
-<p>Health awareness, community engagement, and support for local development initiatives.</p>
+<h2>PVC/VIN Registration Exercise</h2>
+<p class="date">Ongoing</p>
+<p>Supporters are encouraged to register their PVC/VIN and polling unit information on the official campaign website.</p>
 </div>
 
 <div class="event">
-<div class="date">12 October 2026</div>
-<h2>Women Leaders Forum – Ankpa</h2>
-<p>Engagement with women groups on empowerment, business support, and inclusive leadership.</p>
-</div>
-
-<div class="event">
-<div class="date">18 October 2026</div>
-<h2>Grand Kogi East Unity Rally</h2>
-<p>A major campaign rally bringing together supporters from all nine Local Government Areas of Kogi East.</p>
+<h2>Ward Coordinators Meeting</h2>
+<p class="date">Coming Soon</p>
+<p>Meeting with ward and polling unit coordinators to strengthen campaign structures across Kogi East.</p>
 </div>
 
 </div>
 
 <footer>
-<p>© 2026 Idris HK Official Campaign Website.</p>
+<p>© 2026 Idris HK Official Campaign Website</p>
 </footer>
 
 </body>
