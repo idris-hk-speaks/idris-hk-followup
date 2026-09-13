@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kogi East VIN Database | Idris HK 2027</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#f4f4f4;}
+header{
+background:#006400;
+color:white;
+text-align:center;
+padding:20px;
+}
+header h1{color:gold;}
+
+.container{
+max-width:900px;
+margin:20px auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+width:100%;
+padding:14px;
+background:#006400;
+color:white;
+border:none;
+border-radius:5px;
+font-size:17px;
+font-weight:bold;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:10px;
+text-align:left;
+}
+
+th{
+background:#006400;
+color:white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>IDRIS HK 2027 VIN DATABASE</h1>
+<p>Kogi East Senatorial District</p>
+</header>
+
+<div class="container">
+
+<h2>Register New Voter</h2>
+
+<input type="text" id="name" placeholder="Full Name">
+
+<input type="tel" id="phone" placeholder="Phone Number">
+
+<input type="text" id="vin" placeholder="VIN Number">
+
+<select id="lga">
+<option>Ibaji</option>
+<option>Idah</option>
+<option>Dekina</option>
+<option>Ankpa</option>
+<option>Bassa</option>
+<option>Ofu</option>
+<option>Olamaboro</option>
+<option>Omala</option>
+<option>Igalamela/Odolu</option>
+</select>
+
+<input type="text" id="ward" placeholder="Ward">
+
+<input type="text" id="polling" placeholder="Polling Unit">
+
+<button onclick="saveVoter()">Save Voter</button>
+
+<hr>
+
+<h2>Search VIN</h2>
+
+<input type="text" id="search" placeholder="Search Name, VIN or Phone" onkeyup="searchVoter()">
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>VIN</th>
+<th>LGA</th>
+<th>Polling Unit</th>
+</tr>
+</thead>
+
+<tbody id="tableBody"></tbody>
+
+</table>
+
+</div>
+
+<script>
+let voters=[];
+
+function saveVoter(){
+
+let voter={
+name:name.value,
+phone:phone.value,
+vin:vin.value,
+lga:lga.value,
+ward:ward.value,
+polling:polling.value
+};
+
+voters.push(voter);
+
+display(voters);
+
+document.getElementById("name").value="";
+document.getElementById("phone").value="";
+document.getElementById("vin").value="";
+document.getElementById("ward").value="";
+document.getElementById("polling").value="";
+}
+
+function display(list){
+
+let html="";
+
+list.forEach(v=>{
+html += `<tr>
+<td>${v.name}</td>
+<td>${v.vin}</td>
+<td>${v.lga}</td>
+<td>${v.polling}</td>
+</tr>`;
+});
+
+tableBody.innerHTML=html;
+
+}
+
+function searchVoter(){
+
+let value=search.value.toLowerCase();
+
+display(voters.filter(v=>
+v.name.toLowerCase().includes(value) ||
+v.vin.toLowerCase().includes(value) ||
+v.phone.toLowerCase().includes(value)
+));
+
+}
+</script>
+
+</body>
+</html>
