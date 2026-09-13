@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kogi East Voters Database</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#f4f4f4;}
+header{background:#006400;color:#fff;text-align:center;padding:20px;}
+.container{max-width:1000px;margin:20px auto;padding:15px;}
+.card{background:#fff;padding:20px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.15);}
+input,select{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+th,td{
+border:1px solid #ddd;
+padding:10px;
+text-align:left;
+}
+th{
+background:#006400;
+color:white;
+}
+button{
+background:#006400;
+color:white;
+padding:10px 15px;
+border:none;
+border-radius:5px;
+margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>IDRIS HK 2027 VOTERS DATABASE</h2>
+<p>Kogi East Senatorial District</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h3>Search Registered Voter</h3>
+
+<input type="text" placeholder="Search by VIN, Name or Phone Number">
+
+<select>
+<option>Select Local Government</option>
+<option>Ibaji</option>
+<option>Idah</option>
+<option>Dekina</option>
+<option>Ankpa</option>
+<option>Bassa</option>
+<option>Ofu</option>
+<option>Olamaboro</option>
+<option>Omala</option>
+<option>Igalamela/Odolu</option>
+</select>
+
+<button>Search Voter</button>
+
+<table>
+<tr>
+<th>Name</th>
+<th>LGA</th>
+<th>Ward</th>
+<th>Polling Unit</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>Inekwe Theophilus Akoji</td>
+<td>Ibaji</td>
+<td>Ujeh</td>
+<td>PU001</td>
+<td>Registered</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>
