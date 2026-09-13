@@ -3,36 +3,109 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IDRIS HK 2027 | Official Website</title>
+<title>IDRIS HK 2027 | Official Campaign Website</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Arial,sans-serif;background:#f4f4f4;color:#222;}
-header{background:#006400;color:white;padding:15px;position:sticky;top:0;}
-.logo{font-size:24px;font-weight:bold;color:gold;}
-.menu{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;}
-.menu a{
-background:#008000;color:white;text-decoration:none;
-padding:8px 10px;border-radius:5px;font-size:13px;
+body{font-family:Arial,sans-serif;background:#f4f4f4;}
+
+header{
+background:#006400;
+padding:15px;
+text-align:center;
+color:white;
 }
+
+header h1{
+color:gold;
+font-size:30px;
+}
+
+.menu{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:8px;
+background:#004d00;
+padding:10px;
+}
+
+.menu a{
+background:#008000;
+color:white;
+text-decoration:none;
+padding:8px 12px;
+border-radius:5px;
+font-size:13px;
+}
+
 .hero{
-background:#006400;color:white;text-align:center;
+background:#006400;
+color:white;
+text-align:center;
 padding:60px 20px;
 }
-.hero h1{color:gold;font-size:32px;}
-.hero p{margin:15px 0;}
+
+.hero h2{
+color:gold;
+font-size:28px;
+margin-bottom:10px;
+}
+
+.hero p{
+margin-bottom:20px;
+}
+
 .btn{
-background:gold;color:#006400;text-decoration:none;
-padding:12px 20px;border-radius:25px;font-weight:bold;
+display:inline-block;
+background:gold;
+color:#006400;
+padding:12px 20px;
+text-decoration:none;
+border-radius:30px;
+font-weight:bold;
 }
-.section{padding:20px;}
+
+marquee{
+background:gold;
+color:#006400;
+padding:10px;
+font-weight:bold;
+}
+
+.section{
+padding:20px;
+}
+
 .card{
-background:white;padding:18px;margin-bottom:15px;
-border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.1);
+background:white;
+padding:20px;
+margin-bottom:15px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
 }
-.card h3{color:#006400;}
+
+.card h3{
+color:#006400;
+margin-bottom:10px;
+}
+
+.card a{
+display:inline-block;
+margin-top:10px;
+background:#006400;
+color:white;
+padding:10px 15px;
+text-decoration:none;
+border-radius:5px;
+}
+
 footer{
-background:#006400;color:white;text-align:center;padding:20px;
+background:#006400;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:20px;
 }
 </style>
 </head>
@@ -40,12 +113,13 @@ background:#006400;color:white;text-align:center;padding:20px;
 <body>
 
 <header>
-<div class="logo">IDRIS HK 2027</div>
+<h1>IDRIS HK 2027</h1>
+<p>Kogi East Senatorial District Official Campaign Website</p>
+</header>
 
 <div class="menu">
+<a href="index.html">Home</a>
 <a href="about.html">About</a>
-<a href="manifesto.html">Manifesto</a>
-<a href="projects.html">Projects</a>
 <a href="gallery.html">Gallery</a>
 <a href="news.html">News</a>
 <a href="events.html">Events</a>
@@ -55,41 +129,55 @@ background:#006400;color:white;text-align:center;padding:20px;
 <a href="polling-units.html">Polling Units</a>
 <a href="contact.html">Contact</a>
 </div>
-</header>
+
+<marquee>
+BREAKING NEWS: Welcome to the Official Idris HK 2027 Campaign Website • PVC/VIN Registration is Open • Polling Unit Result Upload is Available Across Kogi East.
+</marquee>
 
 <section class="hero">
-<h1>IDRIS HK FOR KOGI EAST SENATE 2027</h1>
+<h2>IDRIS HK FOR KOGI EAST SENATE 2027</h2>
 <p>Hope • Service • Development</p>
+
 <a href="voters-registration.html" class="btn">Register PVC / VIN</a>
 </section>
 
 <section class="section">
 
 <div class="card">
-<h3>About Idris HK</h3>
-<p>Learn about Idris HK's vision, leadership, and commitment to the development of Kogi East.</p>
+<h3>🪪 PVC / VIN Registration</h3>
+<p>Register your Voter Identification Number (VIN), Local Government, Ward and Polling Unit.</p>
+<a href="voters-registration.html">Register Now</a>
 </div>
 
 <div class="card">
-<h3>Live Election Portal</h3>
-<p>Upload polling unit results, check results, and monitor the Kogi East Situation Room.</p>
+<h3>🗳 Upload Polling Unit Results</h3>
+<p>Polling Unit Agents can upload EC8A election results from all 9 Local Government Areas.</p>
+<a href="results.html">Upload Results</a>
 </div>
 
 <div class="card">
-<h3>PVC / VIN Registration</h3>
-<p>Register your VIN and polling unit before the election.</p>
+<h3>📊 Check Election Results</h3>
+<p>Search and view polling unit results from Kogi East.</p>
+<a href="citizen-results.html">Check Results</a>
 </div>
 
 <div class="card">
-<h3>Campaign News & Events</h3>
-<p>Stay updated with campaign activities, town hall meetings, rallies, and community outreach.</p>
+<h3>📍 Polling Unit Directory</h3>
+<p>Search polling units across Ibaji, Idah, Dekina, Ankpa, Bassa, Ofu, Olamaboro, Omala and Igalamela/Odolu.</p>
+<a href="polling-units.html">Open Polling Units</a>
+</div>
+
+<div class="card">
+<h3>📡 Kogi East Situation Room</h3>
+<p>Monitor election activities and live polling unit reports.</p>
+<a href="situation-room.html">Open Situation Room</a>
 </div>
 
 </section>
 
 <footer>
 <h3>IDRIS HK 2027 Official Campaign Website</h3>
-<p>Kogi East Senatorial District, Kogi State, Nigeria.</p>
+<p>Kogi East Senatorial District • Kogi State • Nigeria</p>
 <p>© 2026 All Rights Reserved.</p>
 </footer>
 
