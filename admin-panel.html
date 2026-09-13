@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idris HK Admin Panel</title>
+
+<style>
+body{font-family:Arial;background:#eef2f3;margin:0;}
+header{background:#006400;color:#fff;padding:20px;text-align:center;}
+.container{padding:15px;}
+.card{
+background:#fff;
+padding:15px;
+margin-bottom:15px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+button{
+width:100%;
+padding:12px;
+background:#006400;
+color:#fff;
+border:none;
+border-radius:5px;
+font-size:18px;
+}
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+th,td{
+border:1px solid #ddd;
+padding:10px;
+text-align:center;
+}
+th{background:#006400;color:white;}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>IDRIS HK 2027 ADMIN PANEL</h2>
+<p>Kogi East Election Control Center</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h3>Admin Login</h3>
+
+<input type="text" placeholder="Admin Username">
+<input type="password" placeholder="Admin Password">
+
+<button>Login</button>
+</div>
+
+<div class="card">
+<h3>Dashboard Summary</h3>
+
+<p><b>Total VIN Registered:</b> 0</p>
+<p><b>Total Results Uploaded:</b> 0</p>
+<p><b>Verified Results:</b> 0</p>
+<p><b>Pending Results:</b> 0</p>
+</div>
+
+<div class="card">
+<h3>Polling Unit Results</h3>
+
+<table>
+<tr>
+<th>LGA</th>
+<th>Ward</th>
+<th>Polling Unit</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>Ibaji</td>
+<td>Ujeh</td>
+<td>PU001</td>
+<td>Pending</td>
+</tr>
+
+</table>
+
+<button>Approve Selected Result</button>
+</div>
+
+<div class="card">
+<h3>Voter VIN Records</h3>
+
+<table>
+<tr>
+<th>Name</th>
+<th>Phone</th>
+<th>LGA</th>
+<th>VIN</th>
+</tr>
+
+<tr>
+<td>Example Voter</td>
+<td>08012345678</td>
+<td>Ibaji</td>
+<td>VIN123456789</td>
+</tr>
+
+</table>
+</div>
+
+</div>
+
+</body>
+</html>
