@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kogi East Live Results Server</title>
+
+<style>
+body{font-family:Arial;background:#f4f4f4;margin:0;}
+header{background:#006400;color:white;text-align:center;padding:20px;}
+.container{max-width:900px;margin:20px auto;background:white;padding:20px;border-radius:10px;}
+input,select{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+button{
+width:100%;
+padding:14px;
+background:#006400;
+color:white;
+border:none;
+border-radius:5px;
+font-size:18px;
+}
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+th,td{
+border:1px solid #ddd;
+padding:10px;
+text-align:center;
+}
+th{
+background:#006400;
+color:white;
+}
+.summary{
+background:#e8f5e9;
+padding:15px;
+border-left:5px solid green;
+margin-bottom:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>KOGI EAST LIVE RESULTS SERVER</h2>
+<p>Idris HK 2027 Situation Room</p>
+</header>
+
+<div class="container">
+
+<div class="summary">
+<h3>Live Vote Summary</h3>
+<p>Total SDP Votes: <span id="sdpTotal">0</span></p>
+<p>Total APC Votes: <span id="apcTotal">0</span></p>
+<p>Total PDP Votes: <span id="pdpTotal">0</span></p>
+</div>
+
+<h3>Upload Polling Unit Result</h3>
+
+<select id="lga">
+<option>Ibaji</option>
+<option>Idah</option>
+<option>Dekina</option>
+<option>Ankpa</option>
+<option>Bassa</option>
+<option>Ofu</option>
+<option>Olamaboro</option>
+<option>Omala</option>
+<option>Igalamela/Odolu</option>
+</select>
+
+<input type="text" id="ward" placeholder="Ward Name">
+<input type="text" id="polling" placeholder="Polling Unit">
+
+<input type="number" id="sdp" placeholder="SDP Votes">
+<input type="number" id="apc" placeholder="APC Votes">
+<input type="number" id="pdp" placeholder="PDP Votes">
+
+<input type="file" accept="image/*">
+
+<button onclick="addResult()">Submit Result</button>
+
+<table>
+<thead>
+<tr>
+<th>LGA</th>
+<th>Polling Unit</th>
+<th>SDP</th>
+<th>APC</th>
+<th>PDP</th>
+</tr>
+</thead>
+
+<tbody id="resultsTable"></tbody>
+
+</table>
+
+</div>
+
+<script>
+let results=[];
+let sdpTotal=0;
+let apcTotal=0;
+let pdpTotal=0;
+
+function addResult(){
+
+let item={
+lga:lga.value,
+ward:ward.value,
+polling:polling.value,
+sdp:Number(sdp.value),
+apc:Number(apc.value),
+pdp:Number(pdp.value)
+};
+
+results.push(item);
+
+sdpTotal+=item.sdp;
+apcTotal+=item.apc;
+pdpTotal+=item.pdp;
+
+document.getElementById("sdpTotal").innerHTML=sdpTotal;
+document.getElementById("apcTotal").innerHTML=apcTotal;
+document.getElementById("pdpTotal").innerHTML=pdpTotal;
+
+let row=
+`<tr>
+<td>${item.lga}</td>
+<td>${item.polling}</td>
+<td>${item.sdp}</td>
+<td>${item.apc}</td>
+<td>${item.pdp}</td>
+</tr>`;
+
+resultsTable.innerHTML+=row;
+
+ward.value="";
+polling.value="";
+sdp.value="";
+apc.value="";
+pdp.value="";
+}
+</script>
+
+</body>
+</html>
