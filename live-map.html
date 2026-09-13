@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kogi East Live Election Map</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#f5f5f5;}
+header{
+background:#006400;
+color:white;
+text-align:center;
+padding:20px;
+}
+header h1{color:gold;}
+
+.container{
+max-width:900px;
+margin:20px auto;
+padding:15px;
+}
+
+.map{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.lga{
+background:white;
+padding:18px;
+text-align:center;
+border-radius:10px;
+box-shadow:0 2px 6px rgba(0,0,0,.15);
+border:2px solid #006400;
+cursor:pointer;
+}
+
+.lga:hover{
+background:#006400;
+color:white;
+}
+
+.result{
+margin-top:20px;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+
+footer{
+background:#006400;
+color:white;
+text-align:center;
+padding:15px;
+margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>KOGI EAST LIVE ELECTION MAP</h1>
+<p>Click a Local Government to View Results</p>
+</header>
+
+<div class="container">
+
+<div class="map">
+
+<div class="lga" onclick="showLGA('Ibaji')">IBAJI</div>
+<div class="lga" onclick="showLGA('Idah')">IDAH</div>
+<div class="lga" onclick="showLGA('Dekina')">DEKINA</div>
+<div class="lga" onclick="showLGA('Ankpa')">ANKPA</div>
+<div class="lga" onclick="showLGA('Bassa')">BASSA</div>
+<div class="lga" onclick="showLGA('Ofu')">OFU</div>
+<div class="lga" onclick="showLGA('Olamaboro')">OLAMABORO</div>
+<div class="lga" onclick="showLGA('Omala')">OMALA</div>
+<div class="lga" onclick="showLGA('Igalamela/Odolu')">IGALAMELA/ODOLU</div>
+
+</div>
+
+<div class="result" id="display">
+<h3 style="color:#006400;">Live Election Result</h3>
+<p>Select a Local Government above to display polling unit results.</p>
+</div>
+
+</div>
+
+<footer>
+© 2026 Idris HK Election Situation Room
+</footer>
+
+<script>
+function showLGA(name){
+document.getElementById("display").innerHTML =
+"<h3 style='color:#006400;'>"+name+" Local Government</h3>"+
+"<p><b>Polling Units Reported:</b> 0 / 0</p>"+
+"<p><b>SDP:</b> 0 votes</p>"+
+"<p><b>APC:</b> 0 votes</p>"+
+"<p><b>PDP:</b> 0 votes</p>"+
+"<p><b>Status:</b> Awaiting Results</p>";
+}
+</script>
+
+</body>
+</html>
