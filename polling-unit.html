@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kogi East Polling Unit Database</title>
+
+<style>
+body{font-family:Arial;background:#f4f4f4;margin:0;}
+header{background:#006400;color:#fff;text-align:center;padding:20px;}
+.container{max-width:700px;margin:20px auto;background:#fff;padding:20px;border-radius:10px;}
+select,input{width:100%;padding:12px;margin:10px 0;border:1px solid #ccc;border-radius:5px;}
+button{width:100%;padding:14px;background:#006400;color:#fff;border:none;border-radius:5px;}
+</style>
+</head>
+<body>
+
+<header>
+<h2>KOGI EAST POLLING UNIT DATABASE</h2>
+</header>
+
+<div class="container">
+
+<select id="lga">
+<option>Select Local Government</option>
+<option>Ibaji</option>
+<option>Idah</option>
+<option>Dekina</option>
+<option>Ankpa</option>
+<option>Bassa</option>
+<option>Ofu</option>
+<option>Olamaboro</option>
+<option>Omala</option>
+<option>Igalamela/Odolu</option>
+</select>
+
+<select id="ward">
+<option>Select Ward</option>
+</select>
+
+<select id="polling">
+<option>Select Polling Unit</option>
+</select>
+
+<button>Continue</button>
+
+</div>
+
+<script>
+const wards = {
+  "Ibaji":["Ujeh","Ayah","Onyedega","Unale","Odolu","Ejule-Ojebe","Igga"],
+  "Idah":["Ega","Sabon Gari","Owoli Apa"],
+  "Dekina":["Abocho","Anyigba","Dekina Town"]
+};
+
+document.getElementById("lga").onchange = function(){
+  let ward = document.getElementById("ward");
+  ward.innerHTML = "<option>Select Ward</option>";
+  (wards[this.value] || []).forEach(w=>{
+    ward.innerHTML += `<option>${w}</option>`;
+  });
+};
+</script>
+
+</body>
+</html>
