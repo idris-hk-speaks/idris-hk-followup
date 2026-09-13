@@ -7,55 +7,72 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{
-    font-family:Arial,sans-serif;
-    background:#f4f4f4;
+body{font-family:Arial,sans-serif;background:#f4f4f4;}
+header{background:#006400;color:white;text-align:center;padding:20px;}
+header h1{color:gold;}
+
+.menu{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:8px;
+background:#004d00;
+padding:10px;
 }
-header{
-    background:#006400;
-    color:white;
-    text-align:center;
-    padding:35px 20px;
+.menu a{
+background:#008000;
+color:white;
+text-decoration:none;
+padding:8px 12px;
+border-radius:5px;
+font-size:13px;
 }
-header h1{
-    color:gold;
-}
+
 .container{
-    width:90%;
-    max-width:700px;
-    margin:30px auto;
-    background:white;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0 2px 10px rgba(0,0,0,.15);
+max-width:700px;
+margin:20px auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
 }
-h2{
-    color:#006400;
-    margin-bottom:10px;
+
+h2{color:#006400;text-align:center;margin-bottom:15px;}
+
+input,select,textarea{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
 }
-input, select, textarea{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border:1px solid #ccc;
-    border-radius:5px;
-}
+
 button{
-    width:100%;
-    padding:14px;
-    background:#006400;
-    color:white;
-    border:none;
-    border-radius:5px;
-    font-size:18px;
-    font-weight:bold;
+width:100%;
+padding:14px;
+background:#006400;
+color:white;
+border:none;
+border-radius:5px;
+font-size:18px;
+font-weight:bold;
 }
+
+#success{
+display:none;
+background:#e8f5e9;
+color:#006400;
+padding:10px;
+margin-top:15px;
+border-left:5px solid green;
+}
+
 footer{
-    background:#006400;
-    color:white;
-    text-align:center;
-    padding:20px;
-    margin-top:30px;
+background:#006400;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:20px;
 }
 </style>
 </head>
@@ -63,46 +80,80 @@ footer{
 <body>
 
 <header>
-    <h1>Join Idris HK 2027 Campaign</h1>
-    <p>Become a Volunteer for a Better Kogi East.</p>
+<h1>IDRIS HK 2027</h1>
+<p>Volunteer Registration</p>
 </header>
+
+<div class="menu">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="news.html">News</a>
+<a href="events.html">Events</a>
+<a href="team.html">Team</a>
+<a href="volunteer.html">Volunteer</a>
+<a href="contact.html">Contact</a>
+</div>
 
 <div class="container">
 
-<h2>Volunteer Registration Form</h2>
+<h2>Join the Campaign</h2>
 
-<form action="https://formsubmit.co/info@idrishk.org" method="POST">
+<form id="volunteerForm">
 
-<input type="text" name="Full Name" placeholder="Full Name" required>
+<input type="text" placeholder="Full Name" required>
 
-<input type="tel" name="Phone Number" placeholder="Phone Number" required>
+<input type="tel" placeholder="Phone Number" required>
 
-<input type="email" name="Email" placeholder="Email Address">
+<input type="email" placeholder="Email Address">
 
-<input type="text" name="Community" placeholder="Community / Ward" required>
-
-<input type="text" name="LGA" placeholder="Local Government Area" required>
-
-<select name="Volunteer Area" required>
-<option value="">Select Area of Interest</option>
-<option>Media & Publicity</option>
-<option>Youth Mobilization</option>
-<option>Women Mobilization</option>
-<option>Community Outreach</option>
-<option>Campaign Support</option>
+<select required>
+<option value="">Select Local Government</option>
+<option>Ibaji</option>
+<option>Idah</option>
+<option>Dekina</option>
+<option>Ankpa</option>
+<option>Bassa</option>
+<option>Ofu</option>
+<option>Olamaboro</option>
+<option>Omala</option>
+<option>Igalamela/Odolu</option>
 </select>
 
-<textarea name="Message" rows="5" placeholder="Why do you want to volunteer?"></textarea>
+<input type="text" placeholder="Ward Name" required>
+
+<select required>
+<option value="">Choose Volunteer Role</option>
+<option>Campaign Volunteer</option>
+<option>Ward Coordinator</option>
+<option>Polling Unit Agent</option>
+<option>Youth Mobilizer</option>
+<option>Women Mobilizer</option>
+<option>Media Team</option>
+</select>
+
+<textarea placeholder="Why do you want to join the campaign?" rows="4"></textarea>
 
 <button type="submit">Register as Volunteer</button>
 
 </form>
 
+<div id="success">
+✅ Thank you! Your volunteer registration has been submitted successfully.
+</div>
+
 </div>
 
 <footer>
-<p>© 2026 Idris HK Official Website | Together for Kogi East.</p>
+<p>© 2026 Idris HK Official Campaign Website</p>
 </footer>
+
+<script>
+document.getElementById("volunteerForm").addEventListener("submit", function(e){
+e.preventDefault();
+document.getElementById("success").style.display="block";
+this.reset();
+});
+</script>
 
 </body>
 </html>
