@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supabase Setup</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<style>
+body{font-family:Arial;background:#f4f4f4;padding:20px;}
+.container{
+max-width:700px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+}
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+button{
+width:100%;
+padding:14px;
+background:#006400;
+color:white;
+border:none;
+border-radius:5px;
+font-size:18px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Connect to Supabase</h2>
+
+<input id="url" placeholder="Supabase Project URL">
+<input id="key" placeholder="Supabase Anon Key">
+
+<button onclick="saveConfig()">Save Connection</button>
+
+<p id="msg"></p>
+
+</div>
+
+<script>
+function saveConfig(){
+localStorage.setItem("SUPABASE_URL", url.value);
+localStorage.setItem("SUPABASE_KEY", key.value);
+msg.innerHTML="✅ Supabase Connected Successfully";
+}
+</script>
+
+</body>
+</html>
