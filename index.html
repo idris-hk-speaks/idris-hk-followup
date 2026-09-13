@@ -1,170 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IDRIS HK 2027 | Official Website</title>
-
+<title>IDRIS HK 2027</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Arial,sans-serif;background:#f4f4f4;}
-
-header{
-  background:#006400;
-  color:white;
-  padding:15px;
-  position:sticky;
-  top:0;
-}
-
-.logo{
-  color:gold;
-  font-size:24px;
-  font-weight:bold;
-}
-
-.menu-btn{
-  float:right;
-  font-size:28px;
-  cursor:pointer;
-}
-
-nav{
-  display:none;
-  margin-top:15px;
-}
-
-nav a{
-  display:block;
-  color:white;
-  text-decoration:none;
-  padding:12px;
-  border-bottom:1px solid rgba(255,255,255,.2);
-}
-
-.hero{
-  background:#006400;
-  color:white;
-  text-align:center;
-  padding:60px 20px;
-}
-
-.hero h1{
-  color:gold;
-  margin-bottom:10px;
-}
-
-.hero a{
-  display:inline-block;
-  background:gold;
-  color:#006400;
-  padding:12px 20px;
-  text-decoration:none;
-  border-radius:25px;
-  margin-top:15px;
-  font-weight:bold;
-}
-
-.section{
-  padding:20px;
-}
-
-.card{
-  background:white;
-  padding:18px;
-  margin-bottom:15px;
-  border-radius:10px;
-  box-shadow:0 2px 8px rgba(0,0,0,.15);
-}
-
-.card h3{color:#006400;}
-
-footer{
-  background:#006400;
-  color:white;
-  text-align:center;
-  padding:20px;
-}
+body{font-family:Arial;margin:0;background:#f4f4f4;}
+header{background:#006400;color:white;padding:15px;text-align:center;}
+.menu{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px;background:#004d00;}
+.menu a{color:white;text-decoration:none;background:#008000;padding:8px 10px;border-radius:5px;font-size:13px;}
+.hero{padding:40px 20px;text-align:center;background:#006400;color:white;}
+.hero h1{color:gold;}
 </style>
 </head>
-
 <body>
 
 <header>
-  <span class="logo">IDRIS HK 2027</span>
-  <span class="menu-btn" onclick="menu()">☰</span>
-
-  <nav id="navMenu">
-    <a href="index.html">🏠 Home</a>
-    <a href="about.html">About</a>
-    <a href="manifesto.html">Manifesto</a>
-    <a href="projects.html">Projects</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="news.html">News</a>
-    <a href="events.html">Events</a>
-    <a href="media.html">Media Center</a>
-    <a href="team.html">Campaign Team</a>
-    <a href="volunteer.html">Volunteer</a>
-    <a href="voters-registration.html">PVC / VIN Registration</a>
-    <a href="polling-units.html">Polling Units</a>
-    <a href="results.html">Upload Results</a>
-    <a href="citizen-results.html">Check Results</a>
-    <a href="observer-report.html">Observer Report</a>
-    <a href="ward-coordinators.html">Ward Coordinators</a>
-    <a href="situation-room.html">Situation Room</a>
-    <a href="election-center.html">Election Center</a>
-    <a href="live-map.html">Live Map</a>
-    <a href="agent-login.html">Agent Login</a>
-    <a href="agent-dashboard.html">Agent Dashboard</a>
-    <a href="admin-panel.html">Admin Panel</a>
-    <a href="super-admin.html">Super Admin</a>
-    <a href="donate.html">Donate</a>
-    <a href="contact.html">Contact</a>
-    <a href="privacy-policy.html">Privacy Policy</a>
-    <a href="terms.html">Terms & Conditions</a>
-  </nav>
+<h2>IDRIS HK 2027</h2>
 </header>
 
-<section class="hero">
-  <h1>IDRIS HK FOR KOGI EAST SENATE 2027</h1>
-  <p>Hope • Service • Development</p>
-
-  <a href="voters-registration.html">Register PVC / VIN</a>
-</section>
-
-<section class="section">
-
-<div class="card">
-<h3>🗳 Live Election Center</h3>
-<p>Follow live polling unit results across the 9 Local Government Areas of Kogi East.</p>
+<div class="menu">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="gallery.html">Gallery</a>
+<a href="news.html">News</a>
+<a href="events.html">Events</a>
+<a href="voters-registration.html">Register PVC/VIN</a>
+<a href="results.html">Upload Results</a>
+<a href="citizen-results.html">Check Results</a>
+<a href="contact.html">Contact</a>
 </div>
 
-<div class="card">
-<h3>📍 Polling Unit Directory</h3>
-<p>Search all wards and polling units across Kogi East.</p>
+<div class="hero">
+<h1>IDRIS HK FOR KOGI EAST SENATE 2027</h1>
+<p>Hope • Service • Development</p>
 </div>
-
-<div class="card">
-<h3>👥 Join the Campaign</h3>
-<p>Register as a volunteer, ward coordinator, or polling unit agent.</p>
-</div>
-
-</section>
-
-<footer>
-© 2026 Idris HK Official Campaign Website
-</footer>
-
-<script>
-function menu(){
-  var nav=document.getElementById("navMenu");
-  if(nav.style.display=="block"){
-      nav.style.display="none";
-  }else{
-      nav.style.display="block";
-  }
-}
-</script>
 
 </body>
 </html>
