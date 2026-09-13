@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kogi East Polling Units | Idris HK 2027</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#f4f4f4;}
+header{
+background:#006400;
+color:white;
+text-align:center;
+padding:20px;
+}
+.container{
+max-width:800px;
+margin:20px auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+h2{color:#006400;margin-bottom:15px;}
+select,input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+button{
+width:100%;
+padding:14px;
+background:#006400;
+color:white;
+border:none;
+border-radius:5px;
+font-size:18px;
+}
+.result{
+margin-top:20px;
+padding:15px;
+background:#eef7ee;
+border-left:5px solid green;
+}
+footer{
+background:#006400;
+color:white;
+text-align:center;
+padding:15px;
+margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>KOGI EAST POLLING UNIT DIRECTORY</h1>
+<p>Search Polling Units by Local Government and Ward</p>
+</header>
+
+<div class="container">
+
+<h2>Select Your Polling Unit</h2>
+
+<select id="lga">
+<option value="">Select Local Government</option>
+<option>Ibaji</option>
+<option>Idah</option>
+<option>Dekina</option>
+<option>Ankpa</option>
+<option>Bassa</option>
+<option>Ofu</option>
+<option>Olamaboro</option>
+<option>Omala</option>
+<option>Igalamela/Odolu</option>
+</select>
+
+<select id="ward">
+<option value="">Select Ward</option>
+</select>
+
+<select id="polling">
+<option value="">Select Polling Unit</option>
+</select>
+
+<button onclick="showResult()">Show Polling Unit</button>
+
+<div class="result" id="output">
+Select your Local Government, Ward and Polling Unit.
+</div>
+
+</div>
+
+<footer>
+© 2026 Idris HK Official Campaign Website
+</footer>
+
+<script>
+const data = {
+"Ibaji":{
+"Ujeh":["PU001 Central School","PU002 Market Square","PU003 Community Hall"],
+"Onyedega":["PU001 Primary School","PU002 Town Hall"],
+"Ayah":["PU001 Primary School","PU002 Health Centre"]
+},
+"Idah":{
+"Ega":["PU001 Ega Primary School","PU002 Ega Market"],
+"Sabon Gari":["PU001 Sabon Gari Primary School"]
+},
+"Dekina":{
+"Anyigba":["PU001 University Gate","PU002 Community Hall"],
+"Abocho":["PU001 Abocho Central School"]
+}
+};
+
+const lga=document.getElementById("lga");
+const ward=document.getElementById("ward");
+const polling=document.getElementById("polling");
+
+lga.onchange=function(){
+ward.innerHTML="<option>Select Ward</option>";
+polling.innerHTML="<option>Select Polling Unit</option>";
+
+if(data[this.value]){
+Object.keys(data[this.value]).forEach(function(w){
+ward.innerHTML+=`<option>${w}</option>`;
+});
+}
+};
+
+ward.onchange=function(){
+polling.innerHTML="<option>Select Polling Unit</option>";
+
+let l=lga.value;
+if(data[l] && data[l][this.value]){
+data[l][this.value].forEach(function(p){
+polling.innerHTML+=`<option>${p}</option>`;
+});
+}
+};
+
+function showResult(){
+document.getElementById("output").innerHTML=
+"<b>Local Government:</b> "+lga.value+
+"<br><b>Ward:</b> "+ward.value+
+"<br><b>Polling Unit:</b> "+polling.value;
+}
+</script>
+
+</body>
+</html>
