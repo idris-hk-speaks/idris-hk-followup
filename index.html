@@ -3,44 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IDRIS HK 2027</title>
+<title>IDRIS HK 2027 | Official Website</title>
 
 <style>
-body{margin:0;font-family:Arial;background:#f4f4f4;}
-header{background:#006400;color:white;padding:15px;}
-.logo{font-size:22px;font-weight:bold;color:gold;}
-.menu-btn{
-float:right;
-background:gold;
-color:#006400;
-padding:8px 12px;
-text-decoration:none;
-border-radius:5px;
-font-weight:bold;
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#f4f4f4;color:#222;}
+header{background:#006400;color:white;padding:15px;position:sticky;top:0;}
+.logo{font-size:24px;font-weight:bold;color:gold;}
+.menu{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;}
+.menu a{
+background:#008000;color:white;text-decoration:none;
+padding:8px 10px;border-radius:5px;font-size:13px;
 }
 .hero{
-background:#006400;
-color:white;
-text-align:center;
+background:#006400;color:white;text-align:center;
 padding:60px 20px;
 }
-.hero h1{color:gold;}
-.card{
-background:white;
-margin:15px;
-padding:20px;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,.15);
-}
+.hero h1{color:gold;font-size:32px;}
+.hero p{margin:15px 0;}
 .btn{
-display:block;
-background:#006400;
-color:white;
-text-decoration:none;
-text-align:center;
-padding:12px;
-border-radius:6px;
-margin-top:10px;
+background:gold;color:#006400;text-decoration:none;
+padding:12px 20px;border-radius:25px;font-weight:bold;
+}
+.section{padding:20px;}
+.card{
+background:white;padding:18px;margin-bottom:15px;
+border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+.card h3{color:#006400;}
+footer{
+background:#006400;color:white;text-align:center;padding:20px;
 }
 </style>
 </head>
@@ -48,29 +40,58 @@ margin-top:10px;
 <body>
 
 <header>
-<span class="logo">IDRIS HK 2027</span>
-<a href="menu.html" class="menu-btn">☰ Menu</a>
+<div class="logo">IDRIS HK 2027</div>
+
+<div class="menu">
+<a href="about.html">About</a>
+<a href="manifesto.html">Manifesto</a>
+<a href="projects.html">Projects</a>
+<a href="gallery.html">Gallery</a>
+<a href="news.html">News</a>
+<a href="events.html">Events</a>
+<a href="voters-registration.html">Register PVC/VIN</a>
+<a href="results.html">Upload Results</a>
+<a href="citizen-results.html">Check Results</a>
+<a href="polling-units.html">Polling Units</a>
+<a href="contact.html">Contact</a>
+</div>
 </header>
 
-<div class="hero">
+<section class="hero">
 <h1>IDRIS HK FOR KOGI EAST SENATE 2027</h1>
 <p>Hope • Service • Development</p>
+<a href="voters-registration.html" class="btn">Register PVC / VIN</a>
+</section>
+
+<section class="section">
+
+<div class="card">
+<h3>About Idris HK</h3>
+<p>Learn about Idris HK's vision, leadership, and commitment to the development of Kogi East.</p>
 </div>
 
 <div class="card">
-<h3>🪪 Register PVC / VIN</h3>
-<a href="voters-registration.html" class="btn">Open Registration</a>
+<h3>Live Election Portal</h3>
+<p>Upload polling unit results, check results, and monitor the Kogi East Situation Room.</p>
 </div>
 
 <div class="card">
-<h3>🗳 Upload Polling Unit Result</h3>
-<a href="results.html" class="btn">Upload Result</a>
+<h3>PVC / VIN Registration</h3>
+<p>Register your VIN and polling unit before the election.</p>
 </div>
 
 <div class="card">
-<h3>📊 Check Polling Unit Result</h3>
-<a href="citizen-results.html" class="btn">Check Result</a>
+<h3>Campaign News & Events</h3>
+<p>Stay updated with campaign activities, town hall meetings, rallies, and community outreach.</p>
 </div>
+
+</section>
+
+<footer>
+<h3>IDRIS HK 2027 Official Campaign Website</h3>
+<p>Kogi East Senatorial District, Kogi State, Nigeria.</p>
+<p>© 2026 All Rights Reserved.</p>
+</footer>
 
 </body>
 </html>
