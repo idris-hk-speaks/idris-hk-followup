@@ -1,39 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IDRIS HK 2027</title>
+
 <style>
-body{font-family:Arial;margin:0;background:#f4f4f4;}
-header{background:#006400;color:white;padding:15px;text-align:center;}
-.menu{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px;background:#004d00;}
-.menu a{color:white;text-decoration:none;background:#008000;padding:8px 10px;border-radius:5px;font-size:13px;}
-.hero{padding:40px 20px;text-align:center;background:#006400;color:white;}
+body{margin:0;font-family:Arial;background:#f4f4f4;}
+header{background:#006400;color:white;padding:15px;}
+.logo{font-size:22px;font-weight:bold;color:gold;}
+.menu-btn{
+float:right;
+background:gold;
+color:#006400;
+padding:8px 12px;
+text-decoration:none;
+border-radius:5px;
+font-weight:bold;
+}
+.hero{
+background:#006400;
+color:white;
+text-align:center;
+padding:60px 20px;
+}
 .hero h1{color:gold;}
+.card{
+background:white;
+margin:15px;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+.btn{
+display:block;
+background:#006400;
+color:white;
+text-decoration:none;
+text-align:center;
+padding:12px;
+border-radius:6px;
+margin-top:10px;
+}
 </style>
 </head>
+
 <body>
 
 <header>
-<h2>IDRIS HK 2027</h2>
+<span class="logo">IDRIS HK 2027</span>
+<a href="menu.html" class="menu-btn">☰ Menu</a>
 </header>
-
-<div class="menu">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="gallery.html">Gallery</a>
-<a href="news.html">News</a>
-<a href="events.html">Events</a>
-<a href="voters-registration.html">Register PVC/VIN</a>
-<a href="results.html">Upload Results</a>
-<a href="citizen-results.html">Check Results</a>
-<a href="contact.html">Contact</a>
-</div>
 
 <div class="hero">
 <h1>IDRIS HK FOR KOGI EAST SENATE 2027</h1>
 <p>Hope • Service • Development</p>
+</div>
+
+<div class="card">
+<h3>🪪 Register PVC / VIN</h3>
+<a href="voters-registration.html" class="btn">Open Registration</a>
+</div>
+
+<div class="card">
+<h3>🗳 Upload Polling Unit Result</h3>
+<a href="results.html" class="btn">Upload Result</a>
+</div>
+
+<div class="card">
+<h3>📊 Check Polling Unit Result</h3>
+<a href="citizen-results.html" class="btn">Check Result</a>
 </div>
 
 </body>
