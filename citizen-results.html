@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Check Polling Unit Result</title>
+
+<style>
+body{font-family:Arial;background:#f4f4f4;margin:0;}
+header{background:#006400;color:white;text-align:center;padding:20px;}
+.container{max-width:700px;margin:20px auto;background:white;padding:20px;border-radius:10px;}
+input,button{width:100%;padding:12px;margin:10px 0;}
+button{background:#006400;color:white;border:none;border-radius:5px;}
+.result{display:none;background:#e8f5e9;padding:15px;border-radius:8px;margin-top:20px;}
+table{width:100%;border-collapse:collapse;}
+th,td{border:1px solid #ccc;padding:8px;text-align:center;}
+th{background:#006400;color:white;}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>IDRIS HK 2027</h2>
+<p>Kogi East Polling Unit Result Checker</p>
+</header>
+
+<div class="container">
+
+<input type="text" id="pollingUnit" placeholder="Enter Polling Unit Name">
+
+<button onclick="checkResult()">Check Result</button>
+
+<div class="result" id="resultBox">
+<h3>Polling Unit Result</h3>
+
+<p><b>Polling Unit:</b> <span id="puName"></span></p>
+
+<table>
+<tr><th>Party</th><th>Votes</th></tr>
+<tr><td>SDP</td><td id="sdpVotes"></td></tr>
+<tr><td>APC</td><td id="apcVotes"></td></tr>
+<tr><td>PDP</td><td id="pdpVotes"></td></tr>
+</table>
+
+</div>
+
+</div>
+
+<script>
+function checkResult() {
+  let polling = document.getElementById("pollingUnit").value;
+
+  if (polling === "") {
+    alert("Please enter a Polling Unit.");
+    return;
+  }
+
+  document.getElementById("puName").innerHTML = polling;
+  document.getElementById("sdpVotes").innerHTML = 412;
+  document.getElementById("apcVotes").innerHTML = 245;
+  document.getElementById("pdpVotes").innerHTML = 88;
+
+  document.getElementById("resultBox").style.display = "block";
+}
+</script>
+
+</body>
+</html>
