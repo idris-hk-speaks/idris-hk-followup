@@ -3,81 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Idris HK | Official Website</title>
+<title>Idris HK 2027 | Official Website</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{
-    font-family:Arial,sans-serif;
-    background:#f5f5f5;
-    color:#222;
-}
+body{font-family:Arial,sans-serif;background:#f4f4f4;color:#333;}
+
 header{
-    background:#006400;
-    color:#fff;
-    padding:15px 30px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+background:#006400;
+padding:15px;
+position:sticky;
+top:0;
 }
-header h2{color:gold;}
+
+.logo{
+text-align:center;
+color:gold;
+font-size:28px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+nav{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:8px;
+}
+
 nav a{
-    color:white;
-    text-decoration:none;
-    margin-left:15px;
-    font-weight:bold;
+color:white;
+text-decoration:none;
+background:#008000;
+padding:8px 12px;
+border-radius:5px;
+font-size:14px;
 }
+
 .hero{
-    background:linear-gradient(rgba(0,100,0,.7),rgba(0,100,0,.7)),url("idris-hk.jpg");
-    background-size:cover;
-    background-position:center;
-    color:white;
-    text-align:center;
-    padding:100px 20px;
+background:linear-gradient(rgba(0,100,0,.7),rgba(0,100,0,.7)),url("idris-hk.jpg");
+background-size:cover;
+background-position:center;
+color:white;
+text-align:center;
+padding:80px 20px;
 }
-.hero h1{
-    font-size:42px;
-    margin-bottom:10px;
-}
-.hero p{
-    font-size:20px;
-    margin-bottom:25px;
-}
+
+.hero h1{font-size:38px;color:gold;}
+.hero p{font-size:18px;margin:15px 0;}
+
 .btn{
-    background:gold;
-    color:#006400;
-    padding:12px 25px;
-    text-decoration:none;
-    border-radius:30px;
-    font-weight:bold;
+display:inline-block;
+background:gold;
+color:#006400;
+padding:12px 25px;
+border-radius:30px;
+text-decoration:none;
+font-weight:bold;
 }
+
 .section{
-    padding:40px 20px;
-    max-width:1100px;
-    margin:auto;
+max-width:1100px;
+margin:auto;
+padding:35px 20px;
 }
+
 .cards{
-    display:flex;
-    flex-wrap:wrap;
-    gap:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
 }
+
 .card{
-    background:white;
-    flex:1;
-    min-width:250px;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 2px 10px rgba(0,0,0,.1);
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
+text-align:center;
 }
-.card h3{
-    color:#006400;
-    margin-bottom:10px;
-}
+
+.card h3{color:#006400;margin-bottom:10px;}
+
 footer{
-    background:#006400;
-    color:white;
-    text-align:center;
-    padding:20px;
+background:#006400;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:30px;
 }
 </style>
 </head>
@@ -85,69 +97,66 @@ footer{
 <body>
 
 <header>
-<h2>IDRIS HK</h2>
+<div class="logo">IDRIS HK 2027</div>
+
 <nav>
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
+<a href="manifesto.html">Manifesto</a>
 <a href="projects.html">Projects</a>
+<a href="gallery.html">Gallery</a>
+<a href="news.html">News</a>
+<a href="events.html">Events</a>
+<a href="team.html">Team</a>
+<a href="volunteer.html">Volunteer</a>
+<a href="voters-registration.html">PVC/VIN</a>
+<a href="results.html">Results</a>
+<a href="situation-room.html">Situation Room</a>
 <a href="contact.html">Contact</a>
+<a href="donate.html">Donate</a>
 </nav>
 </header>
 
 <section class="hero">
-<h1>Welcome to the Official Website of Idris HK</h1>
-<p>Service • Leadership • Development • Empowerment</p>
-<a href="about.html" class="btn">Read More</a>
+<h1>IDRIS HK FOR KOGI EAST SENATE 2027</h1>
+<p>Hope • Service • Development</p>
+
+<a class="btn" href="manifesto.html">Read Manifesto</a>
 </section>
 
 <section class="section">
-<h2 style="color:#006400;">About Idris HK</h2>
-<p>
-Alhaji Idris Hussein Kashim (Idris HK) is a businessman,
-philanthropist and community leader committed to the development
-of Kogi East through education, healthcare, youth empowerment and
-grassroots development.
+<h2 style="color:#006400;text-align:center;">Our Mission</h2>
+
+<p style="text-align:center;margin-top:15px;">
+To provide quality representation, empower youths and women,
+improve education, healthcare, agriculture and infrastructure
+across Kogi East Senatorial District.
 </p>
 </section>
 
 <section class="section">
-<h2 style="color:#006400;">Our Focus</h2>
+<h2 style="color:#006400;text-align:center;">Quick Access</h2>
 
 <div class="cards">
 
-<div class="card">
-<h3>Education</h3>
-<p>Supporting students, schools and educational opportunities across Kogi East.</p>
-</div>
+<div class="card"><h3>PVC/VIN Registration</h3></div>
 
-<div class="card">
-<h3>Healthcare</h3>
-<p>Improving access to quality healthcare services and community health support.</p>
-</div>
+<div class="card"><h3>Live Polling Unit Results</h3></div>
 
-<div class="card">
-<h3>Youth Empowerment</h3>
-<p>Creating opportunities for young people through skills, jobs and empowerment programmes.</p>
-</div>
+<div class="card"><h3>Situation Room</h3></div>
 
-<div class="card">
-<h3>Community Development</h3>
-<p>Supporting roads, water projects, electricity and rural development initiatives.</p>
-</div>
+<div class="card"><h3>Volunteer Registration</h3></div>
+
+<div class="card"><h3>Gallery</h3></div>
+
+<div class="card"><h3>Latest News</h3></div>
 
 </div>
-</section>
-
-<section class="section">
-<h2 style="color:#006400;">Our Vision</h2>
-<p>
-To build a united, prosperous and empowered Kogi East where every community has access to development and opportunity.
-</p>
 </section>
 
 <footer>
-<h3>IDRIS HK Official Website</h3>
-<p>Building Hope. Serving the People. Developing Kogi East.</p>
+<h3>IDRIS HK OFFICIAL WEBSITE</h3>
+<p>Kogi East Senatorial District • 2027 Campaign</p>
 <p>© 2026 All Rights Reserved.</p>
 </footer>
 
