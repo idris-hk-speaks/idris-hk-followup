@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PVC/VIN Registration - Idris HK 2027</title>
+
+<style>
+body{font-family:Arial,sans-serif;background:#f4f4f4;margin:0;}
+header{background:#006400;color:#fff;text-align:center;padding:20px;}
+header h1{color:gold;margin:0;}
+.container{
+max-width:700px;
+margin:20px auto;
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+input,select,textarea{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
+box-sizing:border-box;
+}
+button{
+width:100%;
+padding:14px;
+background:#006400;
+color:white;
+border:none;
+border-radius:5px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+button:hover{background:#004d00;}
+#success{
+display:none;
+background:#e8f5e9;
+color:#006400;
+padding:12px;
+margin-top:15px;
+border-left:5px solid green;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>IDRIS HK 2027</h1>
+<p>Kogi East PVC / VIN Registration</p>
+</header>
+
+<div class="container">
+
+<form id="voterForm">
+
+<input type="text" placeholder="Full Name" required>
+
+<input type="tel" placeholder="Phone Number" required>
+
+<input type="text" placeholder="Voter Identification Number (VIN)" required>
+
+<select required>
+<option value="">Select Local Government</option>
+<option>Ibaji</option>
+<option>Idah</option>
+<option>Dekina</option>
+<option>Ankpa</option>
+<option>Bassa</option>
+<option>Ofu</option>
+<option>Olamaboro</option>
+<option>Omala</option>
+<option>Igalamela/Odolu</option>
+</select>
+
+<input type="text" placeholder="Ward Name" required>
+
+<input type="text" placeholder="Polling Unit Name" required>
+
+<textarea placeholder="Village / Community (Optional)"></textarea>
+
+<button type="submit">Register PVC / VIN</button>
+
+</form>
+
+<div id="success">
+✅ Registration submitted successfully. Thank you for registering with the Idris HK 2027 Campaign.
+</div>
+
+</div>
+
+<script>
+document.getElementById("voterForm").addEventListener("submit", function(e){
+e.preventDefault();
+document.getElementById("success").style.display="block";
+this.reset();
+});
+</script>
+
+</body>
+</html>
