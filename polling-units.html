@@ -3,63 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kogi East Polling Unit Database</title>
+<title>Polling Unit Results | IDRIS HK 2027</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 body{font-family:Arial;background:#f4f4f4;margin:0;}
 header{background:#006400;color:#fff;text-align:center;padding:20px;}
-.container{max-width:700px;margin:20px auto;background:#fff;padding:20px;border-radius:10px;}
-select,input{width:100%;padding:12px;margin:10px 0;border:1px solid #ccc;border-radius:5px;}
-button{width:100%;padding:14px;background:#006400;color:#fff;border:none;border-radius:5px;}
+header h1{color:gold;}
+.container{max-width:800px;margin:20px auto;background:#fff;padding:20px;border-radius:10px;}
+input,button{width:100%;padding:12px;margin:10px 0;border-radius:5px;}
+input{border:1px solid #ccc;}
+button{background:#006400;color:white;border:none;font-weight:bold;}
+table{width:100%;border-collapse:collapse;margin-top:20px;}
+th,td{border:1px solid #ddd;padding:10px;text-align:center;}
+th{background:#006400;color:white;}
 </style>
 </head>
+
 <body>
 
 <header>
-<h2>KOGI EAST POLLING UNIT DATABASE</h2>
+<h1>IDRIS HK 2027</h1>
+<p>Kogi East Polling Unit Result Checker</p>
 </header>
 
 <div class="container">
 
-<select id="lga">
-<option>Select Local Government</option>
-<option>Ibaji</option>
-<option>Idah</option>
-<option>Dekina</option>
-<option>Ankpa</option>
-<option>Bassa</option>
-<option>Ofu</option>
-<option>Olamaboro</option>
-<option>Omala</option>
-<option>Igalamela/Odolu</option>
-</select>
+<input type="text" id="search" placeholder="Enter Polling Unit Name">
 
-<select id="ward">
-<option>Select Ward</option>
-</select>
+<button onclick="searchResult()">Check Result</button>
 
-<select id="polling">
-<option>Select Polling Unit</option>
-</select>
-
-<button>Continue</button>
+<table>
+<thead>
+<tr>
+<th>LGA</th>
+<th>Ward</th>
+<th>Polling Unit</th>
+<th>SDP</th>
+<th>APC</th>
+<th>PDP</th>
+</tr>
+</thead>
+<tbody id="resultsBody"></tbody>
+</table>
 
 </div>
 
 <script>
-const wards = {
-  "Ibaji":["Ujeh","Ayah","Onyedega","Unale","Odolu","Ejule-Ojebe","Igga"],
-  "Idah":["Ega","Sabon Gari","Owoli Apa"],
-  "Dekina":["Abocho","Anyigba","Dekina Town"]
-};
+const supabase = window.supabase.createClient(
+"https://unqdjgjippexmwrcwphh.supabase.co",
+"YOUR_FULL_PUBLISHABLE_KEY"
+);
 
-document.getElementById("lga").onchange = function(){
-  let ward = document.getElementById("ward");
-  ward.innerHTML = "<option>Select Ward</option>";
-  (wards[this.value] || []).forEach(w=>{
-    ward.innerHTML += `<option>${w}</option>`;
-  });
-};
+async function searchResult(){
+
+const search=document.getElementById("search").value.trim();
+
+const {data,error}=await supabase
+.from("polling_results")
+.select("*")
+.ilike("polling_unit","%"+search+"%");
+
+if(error){
+alert(error.message);
+return;
+}
+
+const body=document.getElementById("resultsBody");
+body.innerHTML="";
+
+if(data.length===0){
+body.innerHTML="<tr><td colspan='6'>No polling unit result found.</td></tr>";
+return;
+}
+
+data.forEach(r=>{
+body.innerHTML += `
+<tr>
+<td>${r.lga}</td>
+<td>${r.ward}</td>
+<td>${r.polling_unit}</td>
+<td>${r.sdp_votes}</td>
+<td>${r.apc_votes}</td>
+<td>${r.pdp_votes}</td>
+</tr>`;
+});
+
+}
 </script>
 
 </body>
