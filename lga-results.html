@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kogi East LGA Results | IDRIS HK 2027</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+body{font-family:Arial;background:#f4f4f4;margin:0;}
+header{background:#006400;color:white;text-align:center;padding:20px;}
+header h1{color:gold;}
+.container{max-width:900px;margin:20px auto;padding:15px;}
+table{width:100%;border-collapse:collapse;background:white;}
+th,td{border:1px solid #ddd;padding:10px;text-align:center;}
+th{background:#006400;color:white;}
+button{width:100%;padding:12px;background:#006400;color:white;border:none;border-radius:5px;margin-bottom:15px;}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>IDRIS HK 2027</h1>
+<p>Kogi East Local Government Election Results</p>
+</header>
+
+<div class="container">
+
+<button onclick="loadLGAResults()">Refresh LGA Results</button>
+
+<table>
+<thead>
+<tr>
+<th>Local Government</th>
+<th>SDP</th>
+<th>APC</th>
+<th>PDP</th>
+</tr>
+</thead>
+
+<tbody id="lgaTable"></tbody>
+</table>
+
+</div>
+
+<script>
+const supabase = window.supabase.createClient(
+"https://unqdjgjippexmwrcwphh.supabase.co",
+"PASTE_YOUR_FULL_PUBLISHABLE_KEY_HERE"
+);
+
+async function loadLGAResults(){
+
+const { data, error } = await supabase
+.from("polling_results")
+.select("*");
+
+if(error){
+alert(error.message);
+return;
+}
+
+const totals={};
+
+data.forEach(r=>{
+if(!totals[r.lga]){
+totals[r.lga]={sdp:0,apc:0,pdp:0};
+}
+
+totals[r.lga].sdp += r.sdp_votes;
+totals[r.lga].apc += r.apc_votes;
+totals[r.lga].pdp += r.pdp_votes;
+});
+
+let html="";
+
+Object.keys(totals).sort().forEach(lga=>{
+html += `
+<tr>
+<td>${lga}</td>
+<td>${totals[lga].sdp}</td>
+<td>${totals[lga].apc}</td>
+<td>${totals[lga].pdp}</td>
+</tr>`;
+});
+
+document.getElementById("lgaTable").innerHTML=html;
+
+}
+
+loadLGAResults();
+</script>
+
+</body>
+</html>
