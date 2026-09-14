@@ -1,34 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Check Results</title>
+<title>Kogi East Check Results | IDRIS HK 2027</title>
 
 <style>
 body{font-family:Arial;background:#f4f4f4;margin:0;}
 header{background:#006400;color:white;text-align:center;padding:20px;}
+header h1{color:gold;}
 .container{max-width:700px;margin:20px auto;background:white;padding:20px;border-radius:10px;}
 input,button{width:100%;padding:12px;margin:10px 0;}
 button{background:#006400;color:white;border:none;border-radius:5px;}
-#result{display:none;background:#e8f5e9;padding:15px;margin-top:15px;}
+.result{display:none;background:#e8f5e9;padding:15px;margin-top:15px;border-radius:8px;}
 </style>
-</head>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
 <body>
 
 <header>
-<h2>Kogi East Result Checker</h2>
+<h1>IDRIS HK 2027</h1>
+<p>Kogi East Polling Unit Result Checker</p>
 </header>
 
 <div class="container">
 
-<input type="text" id="polling" placeholder="Enter Polling Unit (Example: PU001)">
+<input id="polling" type="text" placeholder="Enter Polling Unit Name">
 
 <button onclick="checkResult()">Check Result</button>
 
-<div id="result">
-<h3 id="pu"></h3>
+<div class="result" id="resultBox">
+<h3 id="puName"></h3>
+<p><b>LGA:</b> <span id="lga"></span></p>
+<p><b>Ward:</b> <span id="ward"></span></p>
 <p><b>SDP:</b> <span id="sdp"></span></p>
 <p><b>APC:</b> <span id="apc"></span></p>
 <p><b>PDP:</b> <span id="pdp"></span></p>
@@ -37,19 +42,34 @@ button{background:#006400;color:white;border:none;border-radius:5px;}
 </div>
 
 <script>
-function checkResult(){
-let result = localStorage.getItem(document.getElementById("polling").value);
+const supabase = window.supabase.createClient(
+  "https://unqdjgjippexmwrcwphh.supabase.co",
+  "PASTE_YOUR_FULL_PUBLISHABLE_KEY_HERE"
+);
 
-if(result){
-let data = JSON.parse(result);
-document.getElementById("pu").innerHTML = data.polling;
-document.getElementById("sdp").innerHTML = data.sdp;
-document.getElementById("apc").innerHTML = data.apc;
-document.getElementById("pdp").innerHTML = data.pdp;
-document.getElementById("result").style.display = "block";
-}else{
-alert("No result found.");
+async function checkResult(){
+
+const polling = document.getElementById("polling").value;
+
+const { data, error } = await supabase
+  .from("polling_results")
+  .select("*")
+  .eq("polling_unit", polling)
+  .single();
+
+if(error || !data){
+  alert("No result found for this polling unit.");
+  return;
 }
+
+document.getElementById("resultBox").style.display="block";
+document.getElementById("puName").innerHTML=data.polling_unit;
+document.getElementById("lga").innerHTML=data.lga;
+document.getElementById("ward").innerHTML=data.ward;
+document.getElementById("sdp").innerHTML=data.sdp_votes;
+document.getElementById("apc").innerHTML=data.apc_votes;
+document.getElementById("pdp").innerHTML=data.pdp_votes;
+
 }
 </script>
 
