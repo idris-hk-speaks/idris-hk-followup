@@ -3,59 +3,123 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kogi East Voter Dashboard</title>
+<title>Agent Dashboard | IDRIS HK 2027</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 body{font-family:Arial;background:#f4f4f4;margin:0;}
-header{background:#006400;color:#fff;padding:20px;text-align:center;}
-.container{padding:15px;}
-.card{
-background:#fff;padding:15px;margin-bottom:15px;
-border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.15);
+header{background:#006400;color:white;text-align:center;padding:20px;}
+header h1{color:gold;}
+.container{
+max-width:700px;
+margin:20px auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
 }
-table{
-width:100%;border-collapse:collapse;background:#fff;
+input,select{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
 }
-th,td{
-border:1px solid #ddd;padding:10px;text-align:center;
+button{
+width:100%;
+padding:14px;
+background:#006400;
+color:white;
+border:none;
+border-radius:5px;
+font-size:18px;
 }
-th{background:#006400;color:white;}
+#message{
+display:none;
+background:#e8f5e9;
+color:#006400;
+padding:10px;
+margin-top:15px;
+border-left:5px solid green;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h2>IDRIS HK 2027 VOTER DASHBOARD</h2>
-<p>Kogi East Senatorial District</p>
+<h1>IDRIS HK 2027</h1>
+<p>Polling Unit Agent Dashboard</p>
 </header>
 
 <div class="container">
 
-<div class="card">
-<h3>Total Registered Supporters</h3>
-<h1>12,580</h1>
+<h2 style="color:#006400;">Upload Polling Unit Result</h2>
+
+<form id="agentForm">
+
+<select id="lga" required>
+<option value="">Select Local Government</option>
+<option>Ibaji</option>
+<option>Idah</option>
+<option>Dekina</option>
+<option>Ankpa</option>
+<option>Bassa</option>
+<option>Ofu</option>
+<option>Olamaboro</option>
+<option>Omala</option>
+<option>Igalamela/Odolu</option>
+</select>
+
+<input id="ward" type="text" placeholder="Ward Name" required>
+
+<input id="polling" type="text" placeholder="Polling Unit Name" required>
+
+<input id="sdp" type="number" placeholder="SDP Votes" required>
+<input id="apc" type="number" placeholder="APC Votes" required>
+<input id="pdp" type="number" placeholder="PDP Votes" required>
+
+<input id="ec8a" type="file" accept="image/*">
+
+<button type="submit">Submit Result</button>
+
+</form>
+
+<div id="message">
+✅ Result submitted successfully. Status: Pending Verification.
 </div>
 
-<table>
-<tr>
-<th>Local Government</th>
-<th>Registered Voters</th>
-</tr>
-
-<tr><td>Ibaji</td><td>1,245</td></tr>
-<tr><td>Idah</td><td>1,850</td></tr>
-<tr><td>Dekina</td><td>2,340</td></tr>
-<tr><td>Ankpa</td><td>1,920</td></tr>
-<tr><td>Bassa</td><td>980</td></tr>
-<tr><td>Ofu</td><td>1,150</td></tr>
-<tr><td>Olamaboro</td><td>1,100</td></tr>
-<tr><td>Omala</td><td>780</td></tr>
-<tr><td>Igalamela/Odolu</td><td>1,215</td></tr>
-
-</table>
-
 </div>
+
+<script>
+const supabase = window.supabase.createClient(
+  "https://unqdjgjippexmwrcwphh.supabase.co",
+  "PASTE_YOUR_FULL_PUBLISHABLE_KEY_HERE"
+);
+
+document.getElementById("agentForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  const result = {
+    lga: lga.value,
+    ward: ward.value,
+    polling_unit: polling.value,
+    sdp_votes: Number(sdp.value),
+    apc_votes: Number(apc.value),
+    pdp_votes: Number(pdp.value)
+  };
+
+  const { error } = await supabase.from("polling_results").insert([result]);
+
+  if(error){
+    alert(error.message);
+  }else{
+    document.getElementById("message").style.display="block";
+    this.reset();
+  }
+});
+</script>
 
 </body>
 </html>
