@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ward Results | IDRIS HK 2027</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+body{font-family:Arial;background:#f4f4f4;margin:0;}
+header{background:#006400;color:white;text-align:center;padding:20px;}
+header h1{color:gold;}
+.container{max-width:900px;margin:20px auto;padding:15px;}
+select,button{width:100%;padding:12px;margin:10px 0;}
+table{width:100%;border-collapse:collapse;background:white;}
+th,td{border:1px solid #ddd;padding:10px;text-align:center;}
+th{background:#006400;color:white;}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>IDRIS HK 2027</h1>
+<p>Kogi East Ward Election Results</p>
+</header>
+
+<div class="container">
+
+<select id="lga">
+<option value="">Select Local Government</option>
+<option>Ibaji</option>
+<option>Idah</option>
+<option>Dekina</option>
+<option>Ankpa</option>
+<option>Bassa</option>
+<option>Ofu</option>
+<option>Olamaboro</option>
+<option>Omala</option>
+<option>Igalamela/Odolu</option>
+</select>
+
+<button onclick="loadWardResults()">View Ward Results</button>
+
+<table>
+<thead>
+<tr>
+<th>Ward</th>
+<th>SDP</th>
+<th>APC</th>
+<th>PDP</th>
+</tr>
+</thead>
+<tbody id="wardTable"></tbody>
+</table>
+
+</div>
+
+<script>
+const supabase = window.supabase.createClient(
+"https://unqdjgjippexmwrcwphh.supabase.co",
+"PASTE_YOUR_FULL_PUBLISHABLE_KEY_HERE"
+);
+
+async function loadWardResults(){
+const lga = document.getElementById("lga").value;
+
+const { data } = await supabase
+.from("polling_results")
+.select("*")
+.eq("lga", lga);
+
+const totals = {};
+
+data.forEach(r=>{
+if(!totals[r.ward]) totals[r.ward]={sdp:0,apc:0,pdp:0};
+totals[r.ward].sdp += r.sdp_votes;
+totals[r.ward].apc += r.apc_votes;
+totals[r.ward].pdp += r.pdp_votes;
+});
+
+let html="";
+Object.keys(totals).forEach(ward=>{
+html += `<tr>
+<td>${ward}</td>
+<td>${totals[ward].sdp}</td>
+<td>${totals[ward].apc}</td>
+<td>${totals[ward].pdp}</td>
+</tr>`;
+});
+
+document.getElementById("wardTable").innerHTML = html;
+}
+</script>
+
+</body>
+</html>
