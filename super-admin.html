@@ -1,106 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SDP Kogi East Admin Dashboard</title>
-
+<title>Admin Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 body{font-family:Arial;background:#f4f4f4;margin:0;}
-header{background:#006400;color:white;text-align:center;padding:20px;}
+header{background:#006400;color:#fff;text-align:center;padding:20px;}
 header h1{color:gold;}
-.container{max-width:900px;margin:20px auto;background:white;padding:20px;border-radius:10px;}
+.container{max-width:900px;margin:20px auto;background:#fff;padding:20px;border-radius:10px;}
 input,button{width:100%;padding:12px;margin:10px 0;border-radius:5px;}
-input{border:1px solid #ccc;}
-button{background:#006400;color:white;border:none;font-weight:bold;}
+button{background:#006400;color:#fff;border:none;}
 table{width:100%;border-collapse:collapse;margin-top:20px;}
 th,td{border:1px solid #ddd;padding:8px;text-align:center;}
 th{background:#006400;color:white;}
 #dashboard{display:none;}
-.menu-btn{width:auto;margin:5px;padding:10px 15px;}
 </style>
 </head>
-
 <body>
 
 <header>
-<h1>🔐 SDP KOGI EAST ADMIN DASHBOARD</h1>
-<p>IDRIS HK 2027 Campaign Management System</p>
+<h1>🔐 IDRIS HK 2027 ADMIN DASHBOARD</h1>
 </header>
 
 <div class="container">
 
 <div id="loginBox">
 <h2>Admin Login</h2>
-
-<input type="password" id="adminPassword" placeholder="Enter Admin Password">
-
+<input type="password" id="password" placeholder="Enter Password">
 <button onclick="login()">Login</button>
-
 </div>
 
 <div id="dashboard">
-
-<h2>Welcome, Admin</h2>
-
-<button class="menu-btn" onclick="loadVoters()">PVC Registrations</button>
-<button class="menu-btn" onclick="loadResults()">Polling Results</button>
-<button class="menu-btn" onclick="loadVolunteers()">Volunteers</button>
-<button class="menu-btn" onclick="loadReports()">Observer Reports</button>
-
+<h2>Polling Unit Results</h2>
 <table>
-<thead id="tableHead"></thead>
+<thead>
+<tr>
+<th>LGA</th>
+<th>Ward</th>
+<th>Polling Unit</th>
+<th>SDP</th>
+<th>APC</th>
+<th>PDP</th>
+</tr>
+</thead>
 <tbody id="tableBody"></tbody>
 </table>
-
 </div>
 
 </div>
 
 <script>
 const supabase = window.supabase.createClient(
-"https://unqdjgjippexmwrcwphh.supabase.co",
-"PASTE_YOUR_FULL_PUBLISHABLE_KEY_HERE"
+  "https://unqdjgjippexmwrcwphh.supabase.co",
+  "PASTE YOUR FULL sb_publishable KEY HERE"
 );
 
-// CHANGE THIS PASSWORD TO YOUR OWN
 const ADMIN_PASSWORD = "IdrisHK2027SDP";
 
 function login(){
-const pass=document.getElementById("adminPassword").value;
-
-if(pass===ADMIN_PASSWORD){
-document.getElementById("loginBox").style.display="none";
-document.getElementById("dashboard").style.display="block";
-}else{
-alert("Incorrect password.");
-}
-}
-
-async function loadVoters(){
-const {data}=await supabase.from("voters").select("*");
-tableHead.innerHTML="<tr><th>Name</th><th>Phone</th><th>LGA</th><th>Ward</th></tr>";
-tableBody.innerHTML=data.map(v=>`<tr><td>${v.full_name}</td><td>${v.phone}</td><td>${v.lga}</td><td>${v.ward}</td></tr>`).join("");
+  if(document.getElementById("password").value===ADMIN_PASSWORD){
+    document.getElementById("loginBox").style.display="none";
+    document.getElementById("dashboard").style.display="block";
+    loadResults();
+  }else{
+    alert("Wrong password");
+  }
 }
 
 async function loadResults(){
-const {data}=await supabase.from("polling_results").select("*");
-tableHead.innerHTML="<tr><th>LGA</th><th>Polling Unit</th><th>SDP</th><th>APC</th><th>PDP</th></tr>";
-tableBody.innerHTML=data.map(r=>`<tr><td>${r.lga}</td><td>${r.polling_unit}</td><td>${r.sdp_votes}</td><td>${r.apc_votes}</td><td>${r.pdp_votes}</td></tr>`).join("");
-}
+  const {data,error}=await supabase.from("polling_results").select("*");
+  if(error){alert(error.message);return;}
 
-async function loadVolunteers(){
-const {data}=await supabase.from("volunteers").select("*");
-tableHead.innerHTML="<tr><th>Name</th><th>Phone</th><th>LGA</th><th>Role</th></tr>";
-tableBody.innerHTML=data.map(v=>`<tr><td>${v.full_name}</td><td>${v.phone}</td><td>${v.lga}</td><td>${v.role}</td></tr>`).join("");
-}
+  let html="";
+  data.forEach(r=>{
+    html += `<tr>
+      <td>${r.lga}</td>
+      <td>${r.ward}</td>
+      <td>${r.polling_unit}</td>
+      <td>${r.sdp_votes}</td>
+      <td>${r.apc_votes}</td>
+      <td>${r.pdp_votes}</td>
+    </tr>`;
+  });
 
-async function loadReports(){
-const {data}=await supabase.from("observer_reports").select("*");
-tableHead.innerHTML="<tr><th>Name</th><th>LGA</th><th>Ward</th><th>Incident</th></tr>";
-tableBody.innerHTML=data.map(r=>`<tr><td>${r.full_name}</td><td>${r.lga}</td><td>${r.ward}</td><td>${r.incident}</td></tr>`).join("");
+  document.getElementById("tableBody").innerHTML=html;
 }
 </script>
 
