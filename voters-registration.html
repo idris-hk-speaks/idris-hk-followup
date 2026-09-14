@@ -3,28 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PVC/VIN Registration - Idris HK 2027</title>
+<title>PVC / VIN Registration | IDRIS HK 2027</title>
 
 <style>
-body{font-family:Arial,sans-serif;background:#f4f4f4;margin:0;}
-header{background:#006400;color:#fff;text-align:center;padding:20px;}
-header h1{color:gold;margin:0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#f4f4f4;}
+header{background:#006400;color:white;text-align:center;padding:20px;}
+header h1{color:gold;}
+
 .container{
 max-width:700px;
 margin:20px auto;
-background:#fff;
+background:white;
 padding:20px;
 border-radius:10px;
 box-shadow:0 2px 8px rgba(0,0,0,.15);
 }
-input,select,textarea{
+
+input,select{
 width:100%;
 padding:12px;
 margin:10px 0;
 border:1px solid #ccc;
 border-radius:5px;
-box-sizing:border-box;
 }
+
 button{
 width:100%;
 padding:14px;
@@ -36,36 +39,61 @@ font-size:18px;
 font-weight:bold;
 cursor:pointer;
 }
-button:hover{background:#004d00;}
-#success{
+
+button:hover{
+background:#004d00;
+}
+
+#message{
 display:none;
-background:#e8f5e9;
-color:#006400;
 padding:12px;
 margin-top:15px;
-border-left:5px solid green;
+border-radius:5px;
+font-weight:bold;
+}
+
+.success{
+background:#e8f5e9;
+color:#006400;
+}
+
+.error{
+background:#fdecea;
+color:#b00020;
+}
+
+footer{
+background:#006400;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:20px;
 }
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
 
 <header>
 <h1>IDRIS HK 2027</h1>
-<p>Kogi East PVC / VIN Registration</p>
+<p>Kogi East PVC / VIN Registration Portal</p>
 </header>
 
 <div class="container">
 
+<h2 style="color:#006400;text-align:center;">Register Your PVC / VIN</h2>
+
 <form id="voterForm">
 
-<input type="text" placeholder="Full Name" required>
+<input id="fullname" type="text" placeholder="Full Name" required>
 
-<input type="tel" placeholder="Phone Number" required>
+<input id="phone" type="tel" placeholder="Phone Number" required>
 
-<input type="text" placeholder="Voter Identification Number (VIN)" required>
+<input id="vin" type="text" placeholder="Voter Identification Number (VIN)" required>
 
-<select required>
+<select id="lga" required>
 <option value="">Select Local Government</option>
 <option>Ibaji</option>
 <option>Idah</option>
@@ -78,27 +106,54 @@ border-left:5px solid green;
 <option>Igalamela/Odolu</option>
 </select>
 
-<input type="text" placeholder="Ward Name" required>
+<input id="ward" type="text" placeholder="Ward Name" required>
 
-<input type="text" placeholder="Polling Unit Name" required>
-
-<textarea placeholder="Village / Community (Optional)"></textarea>
+<input id="polling" type="text" placeholder="Polling Unit Name" required>
 
 <button type="submit">Register PVC / VIN</button>
 
 </form>
 
-<div id="success">
-✅ Registration submitted successfully. Thank you for registering with the Idris HK 2027 Campaign.
-</div>
+<div id="message"></div>
 
 </div>
+
+<footer>
+<p>© 2026 IDRIS HK Official Campaign Website</p>
+</footer>
 
 <script>
-document.getElementById("voterForm").addEventListener("submit", function(e){
-e.preventDefault();
-document.getElementById("success").style.display="block";
-this.reset();
+const supabase = window.supabase.createClient(
+  "https://unqdjgjippexmwrcwphh.supabase.co",
+  "YOUR_FULL_PUBLISHABLE_KEY_HERE"
+);
+
+document.getElementById("voterForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  const message = document.getElementById("message");
+
+  const voter = {
+    full_name: document.getElementById("fullname").value,
+    phone: document.getElementById("phone").value,
+    vin: document.getElementById("vin").value,
+    lga: document.getElementById("lga").value,
+    ward: document.getElementById("ward").value,
+    polling_unit: document.getElementById("polling").value
+  };
+
+  const { error } = await supabase.from("voters").insert([voter]);
+
+  if (error) {
+    message.className = "error";
+    message.style.display = "block";
+    message.innerHTML = "Registration failed: " + error.message;
+  } else {
+    message.className = "success";
+    message.style.display = "block";
+    message.innerHTML = "✅ PVC / VIN Registration Successful!";
+    document.getElementById("voterForm").reset();
+  }
 });
 </script>
 
