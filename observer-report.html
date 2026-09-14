@@ -3,53 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Election Observer Report | Idris HK 2027</title>
+<title>Observer Report | IDRIS HK 2027</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Arial,sans-serif;background:#f4f4f4;}
-header{
-  background:#006400;
-  color:white;
-  text-align:center;
-  padding:20px;
-}
+body{font-family:Arial;background:#f4f4f4;margin:0;}
+header{background:#006400;color:white;text-align:center;padding:20px;}
 header h1{color:gold;}
 .container{
-  max-width:750px;
-  margin:20px auto;
-  background:white;
-  padding:20px;
-  border-radius:10px;
+max-width:700px;
+margin:20px auto;
+background:white;
+padding:20px;
+border-radius:10px;
 }
 input,select,textarea{
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border:1px solid #ccc;
-  border-radius:5px;
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
 }
 button{
-  width:100%;
-  padding:14px;
-  background:#006400;
-  color:white;
-  border:none;
-  border-radius:5px;
-  font-size:18px;
+width:100%;
+padding:14px;
+background:#006400;
+color:white;
+border:none;
+border-radius:5px;
+font-size:18px;
 }
-.note{
-  background:#FFF8DC;
-  padding:10px;
-  border-left:5px solid orange;
-  margin-bottom:15px;
-}
-footer{
-  background:#006400;
-  color:white;
-  text-align:center;
-  padding:15px;
-  margin-top:20px;
+#message{
+display:none;
+background:#e8f5e9;
+color:#006400;
+padding:10px;
+margin-top:15px;
+border-left:5px solid green;
 }
 </style>
 </head>
@@ -57,23 +48,19 @@ footer{
 <body>
 
 <header>
-  <h1>Election Observer Report</h1>
-  <p>Kogi East Senatorial District - Situation Room</p>
+<h1>IDRIS HK 2027</h1>
+<p>Election Observer & Incident Report</p>
 </header>
 
 <div class="container">
 
-<div class="note">
-<b>Report any incident observed at your polling unit.</b>
-</div>
+<form id="observerForm">
 
-<form action="https://formsubmit.co/info@idrishk.org" method="POST" enctype="multipart/form-data">
+<input id="fullname" type="text" placeholder="Full Name" required>
 
-<input type="text" name="observer_name" placeholder="Observer / Agent Name" required>
+<input id="phone" type="tel" placeholder="Phone Number" required>
 
-<input type="tel" name="phone" placeholder="Phone Number" required>
-
-<select name="lga" required>
+<select id="lga" required>
 <option value="">Select Local Government</option>
 <option>Ibaji</option>
 <option>Idah</option>
@@ -86,34 +73,53 @@ footer{
 <option>Igalamela/Odolu</option>
 </select>
 
-<input type="text" name="ward" placeholder="Ward Name" required>
+<input id="ward" type="text" placeholder="Ward Name" required>
 
-<input type="text" name="polling_unit" placeholder="Polling Unit Name / Code" required>
+<input id="polling" type="text" placeholder="Polling Unit Name" required>
 
-<select name="incident_type" required>
-<option value="">Select Incident Type</option>
-<option>Vote Buying</option>
-<option>Violence</option>
-<option>Ballot Box Snatching</option>
-<option>Late Arrival of Officials</option>
-<option>Intimidation</option>
-<option>Other</option>
-</select>
+<textarea id="incident" rows="5"
+placeholder="Describe the incident (violence, vote buying, intimidation, missing materials, etc.)" required></textarea>
 
-<textarea name="report" rows="6" placeholder="Describe what happened..." required></textarea>
-
-<label>Upload Photo or Video Evidence</label>
-<input type="file" name="evidence" accept="image/*,video/*">
-
-<button type="submit">Submit Incident Report</button>
+<button type="submit">Submit Report</button>
 
 </form>
 
+<div id="message">
+✅ Incident report submitted successfully.
 </div>
 
-<footer>
-© 2026 Idris HK Election Situation Room
-</footer>
+</div>
+
+<script>
+const supabase = window.supabase.createClient(
+  "https://unqdjgjippexmwrcwphh.supabase.co",
+  "PASTE_YOUR_FULL_PUBLISHABLE_KEY_HERE"
+);
+
+document.getElementById("observerForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  const report = {
+    full_name: fullname.value,
+    phone: phone.value,
+    lga: lga.value,
+    ward: ward.value,
+    polling_unit: polling.value,
+    incident: incident.value
+  };
+
+  const { error } = await supabase
+    .from("observer_reports")
+    .insert([report]);
+
+  if (error) {
+    alert("Submission failed: " + error.message);
+  } else {
+    document.getElementById("message").style.display = "block";
+    this.reset();
+  }
+});
+</script>
 
 </body>
 </html>
