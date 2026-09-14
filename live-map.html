@@ -3,60 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kogi East Live Election Map</title>
+<title>Kogi East Live Election Dashboard | IDRIS HK 2027</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Arial,sans-serif;background:#f5f5f5;}
-header{
-background:#006400;
-color:white;
-text-align:center;
-padding:20px;
-}
+body{font-family:Arial,sans-serif;background:#f4f4f4;margin:0;}
+header{background:#006400;color:white;text-align:center;padding:20px;}
 header h1{color:gold;}
+.container{max-width:900px;margin:20px auto;padding:15px;}
 
-.container{
-max-width:900px;
-margin:20px auto;
-padding:15px;
-}
-
-.map{
+.summary{
 display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:10px;
+margin-bottom:20px;
 }
-
-.lga{
+.box{
 background:white;
-padding:18px;
-text-align:center;
-border-radius:10px;
-box-shadow:0 2px 6px rgba(0,0,0,.15);
-border:2px solid #006400;
-cursor:pointer;
-}
-
-.lga:hover{
-background:#006400;
-color:white;
-}
-
-.result{
-margin-top:20px;
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,.15);
-}
-
-footer{
-background:#006400;
-color:white;
-text-align:center;
 padding:15px;
-margin-top:20px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+.box h3{color:#006400;margin:0;}
+.box p{font-size:22px;font-weight:bold;margin:8px 0;}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+}
+th,td{
+border:1px solid #ddd;
+padding:10px;
+text-align:center;
+}
+th{
+background:#006400;
+color:white;
+}
+
+button{
+background:#006400;
+color:white;
+padding:12px;
+border:none;
+border-radius:6px;
+width:100%;
+margin:15px 0;
+font-size:16px;
 }
 </style>
 </head>
@@ -64,47 +60,115 @@ margin-top:20px;
 <body>
 
 <header>
-<h1>KOGI EAST LIVE ELECTION MAP</h1>
-<p>Click a Local Government to View Results</p>
+<h1>IDRIS HK 2027</h1>
+<p>Kogi East Live Election Dashboard</p>
 </header>
 
 <div class="container">
 
-<div class="map">
-
-<div class="lga" onclick="showLGA('Ibaji')">IBAJI</div>
-<div class="lga" onclick="showLGA('Idah')">IDAH</div>
-<div class="lga" onclick="showLGA('Dekina')">DEKINA</div>
-<div class="lga" onclick="showLGA('Ankpa')">ANKPA</div>
-<div class="lga" onclick="showLGA('Bassa')">BASSA</div>
-<div class="lga" onclick="showLGA('Ofu')">OFU</div>
-<div class="lga" onclick="showLGA('Olamaboro')">OLAMABORO</div>
-<div class="lga" onclick="showLGA('Omala')">OMALA</div>
-<div class="lga" onclick="showLGA('Igalamela/Odolu')">IGALAMELA/ODOLU</div>
-
+<div class="summary">
+<div class="box">
+<h3>SDP</h3>
+<p id="totalSDP">0</p>
 </div>
 
-<div class="result" id="display">
-<h3 style="color:#006400;">Live Election Result</h3>
-<p>Select a Local Government above to display polling unit results.</p>
+<div class="box">
+<h3>APC</h3>
+<p id="totalAPC">0</p>
 </div>
 
+<div class="box">
+<h3>PDP</h3>
+<p id="totalPDP">0</p>
 </div>
 
-<footer>
-© 2026 Idris HK Election Situation Room
-</footer>
+<div class="box">
+<h3>Polling Units</h3>
+<p id="totalPU">0</p>
+</div>
+</div>
+
+<button onclick="loadDashboard()">Refresh Dashboard</button>
+
+<table>
+<thead>
+<tr>
+<th>LGA</th>
+<th>SDP</th>
+<th>APC</th>
+<th>PDP</th>
+</tr>
+</thead>
+
+<tbody id="dashboardTable"></tbody>
+
+</table>
+
+</div>
 
 <script>
-function showLGA(name){
-document.getElementById("display").innerHTML =
-"<h3 style='color:#006400;'>"+name+" Local Government</h3>"+
-"<p><b>Polling Units Reported:</b> 0 / 0</p>"+
-"<p><b>SDP:</b> 0 votes</p>"+
-"<p><b>APC:</b> 0 votes</p>"+
-"<p><b>PDP:</b> 0 votes</p>"+
-"<p><b>Status:</b> Awaiting Results</p>";
+const supabase = window.supabase.createClient(
+"https://unqdjgjippexmwrcwphh.supabase.co",
+"PASTE_YOUR_FULL_PUBLISHABLE_KEY_HERE"
+);
+
+async function loadDashboard(){
+
+const { data, error } = await supabase
+.from("polling_results")
+.select("*");
+
+if(error){
+alert(error.message);
+return;
 }
+
+let sdp=0, apc=0, pdp=0;
+
+let lgas={
+"Ibaji":{sdp:0,apc:0,pdp:0},
+"Idah":{sdp:0,apc:0,pdp:0},
+"Dekina":{sdp:0,apc:0,pdp:0},
+"Ankpa":{sdp:0,apc:0,pdp:0},
+"Bassa":{sdp:0,apc:0,pdp:0},
+"Ofu":{sdp:0,apc:0,pdp:0},
+"Olamaboro":{sdp:0,apc:0,pdp:0},
+"Omala":{sdp:0,apc:0,pdp:0},
+"Igalamela/Odolu":{sdp:0,apc:0,pdp:0}
+};
+
+data.forEach(r=>{
+sdp += r.sdp_votes;
+apc += r.apc_votes;
+pdp += r.pdp_votes;
+
+if(lgas[r.lga]){
+lgas[r.lga].sdp += r.sdp_votes;
+lgas[r.lga].apc += r.apc_votes;
+lgas[r.lga].pdp += r.pdp_votes;
+}
+});
+
+document.getElementById("totalSDP").innerHTML=sdp;
+document.getElementById("totalAPC").innerHTML=apc;
+document.getElementById("totalPDP").innerHTML=pdp;
+document.getElementById("totalPU").innerHTML=data.length;
+
+let html="";
+Object.keys(lgas).forEach(name=>{
+html += `
+<tr>
+<td>${name}</td>
+<td>${lgas[name].sdp}</td>
+<td>${lgas[name].apc}</td>
+<td>${lgas[name].pdp}</td>
+</tr>`;
+});
+
+document.getElementById("dashboardTable").innerHTML=html;
+}
+
+loadDashboard();
 </script>
 
 </body>
