@@ -3,121 +3,98 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Idris HK Admin Panel</title>
+<title>IDRIS HK 2027 Admin Panel</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-body{font-family:Arial;background:#eef2f3;margin:0;}
-header{background:#006400;color:#fff;padding:20px;text-align:center;}
-.container{padding:15px;}
-.card{
-background:#fff;
-padding:15px;
-margin-bottom:15px;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,.15);
-}
-input{
-width:100%;
-padding:12px;
-margin:10px 0;
-border:1px solid #ccc;
-border-radius:5px;
-}
-button{
-width:100%;
-padding:12px;
-background:#006400;
-color:#fff;
-border:none;
-border-radius:5px;
-font-size:18px;
-}
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:15px;
-}
-th,td{
-border:1px solid #ddd;
-padding:10px;
-text-align:center;
-}
+body{font-family:Arial;background:#f4f4f4;margin:0;}
+header{background:#006400;color:white;text-align:center;padding:20px;}
+header h1{color:gold;}
+.container{max-width:900px;margin:20px auto;background:white;padding:20px;border-radius:10px;}
+input{width:100%;padding:12px;margin:10px 0;}
+button{width:100%;padding:12px;background:#006400;color:white;border:none;border-radius:5px;}
+table{width:100%;border-collapse:collapse;margin-top:20px;}
+th,td{border:1px solid #ddd;padding:8px;text-align:center;}
 th{background:#006400;color:white;}
+#dashboard{display:none;}
 </style>
 </head>
 
 <body>
 
 <header>
-<h2>IDRIS HK 2027 ADMIN PANEL</h2>
-<p>Kogi East Election Control Center</p>
+<h1>IDRIS HK 2027</h1>
+<p>Campaign Admin Panel</p>
 </header>
 
 <div class="container">
 
-<div class="card">
-<h3>Admin Login</h3>
+<div id="login">
+<h2>Admin Login</h2>
 
-<input type="text" placeholder="Admin Username">
-<input type="password" placeholder="Admin Password">
+<input type="password" id="password" placeholder="Enter Admin Password">
 
-<button>Login</button>
+<button onclick="login()">Login</button>
 </div>
 
-<div class="card">
-<h3>Dashboard Summary</h3>
-
-<p><b>Total VIN Registered:</b> 0</p>
-<p><b>Total Results Uploaded:</b> 0</p>
-<p><b>Verified Results:</b> 0</p>
-<p><b>Pending Results:</b> 0</p>
-</div>
-
-<div class="card">
-<h3>Polling Unit Results</h3>
+<div id="dashboard">
+<h2>Uploaded Polling Results</h2>
 
 <table>
+<thead>
 <tr>
 <th>LGA</th>
 <th>Ward</th>
 <th>Polling Unit</th>
-<th>Status</th>
+<th>SDP</th>
+<th>APC</th>
+<th>PDP</th>
 </tr>
+</thead>
 
-<tr>
-<td>Ibaji</td>
-<td>Ujeh</td>
-<td>PU001</td>
-<td>Pending</td>
-</tr>
+<tbody id="resultsTable"></tbody>
 
 </table>
 
-<button>Approve Selected Result</button>
-</div>
-
-<div class="card">
-<h3>Voter VIN Records</h3>
-
-<table>
-<tr>
-<th>Name</th>
-<th>Phone</th>
-<th>LGA</th>
-<th>VIN</th>
-</tr>
-
-<tr>
-<td>Example Voter</td>
-<td>08012345678</td>
-<td>Ibaji</td>
-<td>VIN123456789</td>
-</tr>
-
-</table>
 </div>
 
 </div>
+
+<script>
+const supabase = window.supabase.createClient(
+"https://unqdjgjippexmwrcwphh.supabase.co",
+"PASTE YOUR FULL sb_publishable KEY HERE"
+);
+
+function login(){
+if(document.getElementById("password").value==="IDRISHK2027"){
+document.getElementById("login").style.display="none";
+document.getElementById("dashboard").style.display="block";
+loadResults();
+}else{
+alert("Wrong password.");
+}
+}
+
+async function loadResults(){
+const { data } = await supabase.from("polling_results").select("*");
+
+let html="";
+data.forEach(r=>{
+html+=`<tr>
+<td>${r.lga}</td>
+<td>${r.ward}</td>
+<td>${r.polling_unit}</td>
+<td>${r.sdp_votes}</td>
+<td>${r.apc_votes}</td>
+<td>${r.pdp_votes}</td>
+</tr>`;
+});
+
+document.getElementById("resultsTable").innerHTML=html;
+}
+</script>
 
 </body>
 </html>
