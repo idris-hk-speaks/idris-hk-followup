@@ -3,88 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Upload Results - Idris HK 2027</title>
+<title>Upload Polling Unit Results | IDRIS HK 2027</title>
 
 <style>
-body{
-    font-family:Arial,sans-serif;
-    margin:0;
-    background:#f4f4f4;
-}
-header{
-    background:#006400;
-    color:white;
-    text-align:center;
-    padding:20px;
-}
-header h2{
-    color:gold;
-    margin:0;
-}
+body{font-family:Arial;background:#f4f4f4;margin:0;}
+header{background:#006400;color:white;text-align:center;padding:20px;}
+header h1{color:gold;}
+
 .container{
-    max-width:700px;
-    margin:20px auto;
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+max-width:700px;
+margin:20px auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
 }
+
 input,select{
-    width:100%;
-    padding:12px;
-    margin:8px 0;
-    border:1px solid #ccc;
-    border-radius:5px;
-    box-sizing:border-box;
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
 }
+
 button{
-    width:100%;
-    padding:14px;
-    background:#006400;
-    color:white;
-    border:none;
-    border-radius:5px;
-    font-size:18px;
-    cursor:pointer;
+width:100%;
+padding:14px;
+background:#006400;
+color:white;
+border:none;
+border-radius:5px;
+font-size:18px;
+font-weight:bold;
 }
-button:hover{
-    background:#004d00;
-}
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:20px;
-}
-th,td{
-    border:1px solid #ddd;
-    padding:10px;
-    text-align:center;
-}
-th{
-    background:#006400;
-    color:white;
-}
+
 #message{
-    display:none;
-    background:#e8f5e9;
-    color:#006400;
-    padding:10px;
-    margin-top:15px;
-    border-left:5px solid green;
+display:none;
+padding:10px;
+margin-top:15px;
+background:#e8f5e9;
+color:#006400;
+border-left:5px solid green;
 }
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
 
 <header>
-    <h2>IDRIS HK 2027</h2>
-    <p>Kogi East Polling Unit Result Upload</p>
+<h1>IDRIS HK 2027</h1>
+<p>Kogi East Polling Unit Result Upload</p>
 </header>
 
 <div class="container">
 
-<select id="lga">
+<form id="resultForm">
+
+<select id="lga" required>
 <option value="">Select Local Government</option>
 <option>Ibaji</option>
 <option>Idah</option>
@@ -97,69 +75,51 @@ th{
 <option>Igalamela/Odolu</option>
 </select>
 
-<input type="text" id="ward" placeholder="Ward Name">
-<input type="text" id="polling" placeholder="Polling Unit Name">
+<input id="ward" type="text" placeholder="Ward Name" required>
 
-<input type="number" id="sdp" placeholder="SDP Votes">
-<input type="number" id="apc" placeholder="APC Votes">
-<input type="number" id="pdp" placeholder="PDP Votes">
+<input id="polling" type="text" placeholder="Polling Unit Name" required>
 
-<button onclick="uploadResult()">Upload Result</button>
+<input id="sdp" type="number" placeholder="SDP Votes" required>
 
-<div id="message">
-    ✅ Result uploaded successfully.
-</div>
+<input id="apc" type="number" placeholder="APC Votes" required>
 
-<table>
-<thead>
-<tr>
-<th>LGA</th>
-<th>Polling Unit</th>
-<th>SDP</th>
-<th>APC</th>
-<th>PDP</th>
-</tr>
-</thead>
+<input id="pdp" type="number" placeholder="PDP Votes" required>
 
-<tbody id="resultTable"></tbody>
-</table>
+<button type="submit">Upload Result</button>
+
+</form>
+
+<div id="message">✅ Result uploaded successfully.</div>
 
 </div>
 
 <script>
-function uploadResult(){
+const supabase = window.supabase.createClient(
+  "https://unqdjgjippexmwrcwphh.supabase.co",
+  "PASTE_YOUR_FULL_PUBLISHABLE_KEY_HERE"
+);
 
-const lga = document.getElementById("lga").value;
-const polling = document.getElementById("polling").value;
-const sdp = document.getElementById("sdp").value;
-const apc = document.getElementById("apc").value;
-const pdp = document.getElementById("pdp").value;
+document.getElementById("resultForm").addEventListener("submit", async function(e){
+  e.preventDefault();
 
-if(lga=="" || polling=="" || sdp=="" || apc=="" || pdp==""){
-alert("Please fill all fields.");
-return;
-}
+  const result = {
+    lga: document.getElementById("lga").value,
+    ward: document.getElementById("ward").value,
+    polling_unit: document.getElementById("polling").value,
+    sdp_votes: parseInt(document.getElementById("sdp").value),
+    apc_votes: parseInt(document.getElementById("apc").value),
+    pdp_votes: parseInt(document.getElementById("pdp").value)
+  };
 
-const table = document.getElementById("resultTable");
+  const { error } = await supabase.from("polling_results").insert([result]);
 
-table.innerHTML += `
-<tr>
-<td>${lga}</td>
-<td>${polling}</td>
-<td>${sdp}</td>
-<td>${apc}</td>
-<td>${pdp}</td>
-</tr>
-`;
-
-document.getElementById("message").style.display="block";
-
-document.getElementById("ward").value="";
-document.getElementById("polling").value="";
-document.getElementById("sdp").value="";
-document.getElementById("apc").value="";
-document.getElementById("pdp").value="";
-}
+  if (error) {
+    alert("Upload failed: " + error.message);
+  } else {
+    document.getElementById("message").style.display = "block";
+    document.getElementById("resultForm").reset();
+  }
+});
 </script>
 
 </body>
