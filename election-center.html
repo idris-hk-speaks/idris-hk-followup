@@ -3,184 +3,81 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kogi East Election Center | Idris HK 2027</title>
+<title>Kogi East Election Centre | IDRIS HK 2027</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Arial,sans-serif;background:#f2f5f2;}
-header{
-  background:#006400;
-  color:white;
-  text-align:center;
-  padding:20px;
-}
+body{font-family:Arial;background:#f4f4f4;margin:0;}
+header{background:#006400;color:white;text-align:center;padding:20px;}
 header h1{color:gold;}
-
-.menu{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
-  background:#004d00;
-  padding:10px;
-}
-.menu a{
-  background:#008000;
-  color:white;
-  text-decoration:none;
-  padding:10px;
-  text-align:center;
-  border-radius:5px;
-  font-size:14px;
-}
-
-.container{padding:15px;}
-
-.summary{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-.box{
-  background:white;
-  padding:15px;
-  border-radius:10px;
-  text-align:center;
-  box-shadow:0 2px 6px rgba(0,0,0,.15);
-}
-.box h2{color:#006400;font-size:28px;}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:15px;
-  background:white;
-}
-th,td{
-  border:1px solid #ddd;
-  padding:10px;
-  text-align:center;
-}
-th{
-  background:#006400;
-  color:white;
-}
-
-.progress{
-  width:100%;
-  background:#ddd;
-  border-radius:20px;
-  margin-top:10px;
-}
-.progress div{
-  width:0%;
-  height:18px;
-  background:green;
-  border-radius:20px;
-}
-
-footer{
-  background:#006400;
-  color:white;
-  text-align:center;
-  padding:20px;
-  margin-top:20px;
-}
+.menu{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;background:#004d00;padding:10px;}
+.menu a{background:#008000;color:white;text-decoration:none;padding:8px 12px;border-radius:5px;font-size:13px;}
+.container{padding:20px;max-width:900px;margin:auto;}
+.card{background:white;padding:20px;margin-bottom:15px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.15);}
+.card h3{color:#006400;}
+input,select{width:100%;padding:12px;margin:10px 0;border:1px solid #ccc;border-radius:5px;}
+button{width:100%;padding:12px;background:#006400;color:white;border:none;border-radius:5px;}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>IDRIS HK 2027 ELECTION CENTER</h1>
-  <p>Kogi East Senatorial District Live Monitoring Portal</p>
+<h1>IDRIS HK 2027</h1>
+<p>Kogi East Election Centre</p>
 </header>
 
 <div class="menu">
-  <a href="index.html">Home</a>
-  <a href="results.html">Upload Results</a>
-  <a href="situation-room.html">Situation Room</a>
-  <a href="admin-panel.html">Admin Panel</a>
-  <a href="polling-units.html">Polling Units</a>
-  <a href="voters-registration.html">PVC/VIN</a>
+<a href="live-map.html">Live Dashboard</a>
+<a href="results.html">Upload Results</a>
+<a href="citizen-results.html">Check Results</a>
+<a href="situation-room.html">Situation Room</a>
+<a href="polling-units.html">Polling Units</a>
+<a href="inec.html">INEC Portal</a>
 </div>
 
 <div class="container">
 
-<div class="summary">
-  <div class="box">
-    <h2>1,754</h2>
-    <p>Total Polling Units</p>
-  </div>
+<div class="card">
+<h3>Search Polling Unit</h3>
 
-  <div class="box">
-    <h2>0</h2>
-    <p>Results Uploaded</p>
-  </div>
+<select>
+<option>Select Local Government</option>
+<option>Ibaji</option>
+<option>Idah</option>
+<option>Dekina</option>
+<option>Ankpa</option>
+<option>Bassa</option>
+<option>Ofu</option>
+<option>Olamaboro</option>
+<option>Omala</option>
+<option>Igalamela/Odolu</option>
+</select>
 
-  <div class="box">
-    <h2>0</h2>
-    <p>Verified Results</p>
-  </div>
+<input type="text" placeholder="Enter Ward Name">
+<input type="text" placeholder="Enter Polling Unit Name">
 
-  <div class="box">
-    <h2>0%</h2>
-    <p>Election Progress</p>
-  </div>
+<button>Search Polling Unit</button>
 </div>
 
-<h3 style="margin-top:20px;color:#006400;">Live Results by LGA</h3>
+<div class="card">
+<h3>Election Services</h3>
 
-<table>
-<tr>
-<th>LGA</th>
-<th>SDP</th>
-<th>APC</th>
-<th>PDP</th>
-<th>Status</th>
-</tr>
-
-<tr><td>Ibaji</td><td>0</td><td>0</td><td>0</td><td>Pending</td></tr>
-<tr><td>Idah</td><td>0</td><td>0</td><td>0</td><td>Pending</td></tr>
-<tr><td>Dekina</td><td>0</td><td>0</td><td>0</td><td>Pending</td></tr>
-<tr><td>Ankpa</td><td>0</td><td>0</td><td>0</td><td>Pending</td></tr>
-<tr><td>Bassa</td><td>0</td><td>0</td><td>0</td><td>Pending</td></tr>
-<tr><td>Ofu</td><td>0</td><td>0</td><td>0</td><td>Pending</td></tr>
-<tr><td>Olamaboro</td><td>0</td><td>0</td><td>0</td><td>Pending</td></tr>
-<tr><td>Omala</td><td>0</td><td>0</td><td>0</td><td>Pending</td></tr>
-<tr><td>Igalamela/Odolu</td><td>0</td><td>0</td><td>0</td><td>Pending</td></tr>
-
-</table>
-
-<h3 style="margin-top:20px;color:#006400;">Polling Unit Reporting Progress</h3>
-
-<div class="progress">
-  <div></div>
+<p>🪪 PVC/VIN Registration</p>
+<p>🗳 Polling Unit Result Upload</p>
+<p>📊 Check Election Results</p>
+<p>📡 Live Election Situation Room</p>
+<p>🏛 Official INEC Information</p>
 </div>
 
-<p style="margin-top:10px;">0 of 1,754 polling units have submitted results.</p>
+<div class="card">
+<h3>Kogi East Coverage</h3>
 
-<h3 style="margin-top:20px;color:#006400;">Result Verification</h3>
-
-<table>
-<tr>
-<th>Polling Unit</th>
-<th>EC8A Photo</th>
-<th>Status</th>
-</tr>
-
-<tr>
-<td>PU001</td>
-<td>Not Uploaded</td>
-<td>Pending</td>
-</tr>
-
-</table>
-
+<p>9 Local Government Areas</p>
+<p>97 Electoral Wards</p>
+<p>1,754 Polling Units</p>
 </div>
 
-<footer>
-© 2026 Idris HK Official Election Center
-</footer>
+</div>
 
 </body>
 </html>
