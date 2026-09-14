@@ -5,63 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kogi East Situation Room</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-body{font-family:Arial;background:#f3f5f7;margin:0;}
-header{background:#006400;color:white;padding:20px;text-align:center;}
-.card{
-background:white;margin:15px;padding:15px;
-border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.15);
-}
+body{font-family:Arial;background:#f4f4f4;margin:0;}
+header{background:#006400;color:white;text-align:center;padding:20px;}
+header h1{color:gold;}
+.container{max-width:900px;margin:20px auto;background:white;padding:20px;border-radius:10px;}
 table{width:100%;border-collapse:collapse;}
-th,td{padding:10px;border:1px solid #ddd;text-align:center;}
+th,td{border:1px solid #ddd;padding:10px;text-align:center;}
 th{background:#006400;color:white;}
-.total{
-font-size:26px;color:#006400;font-weight:bold;text-align:center;
-}
+button{background:#006400;color:white;padding:10px 15px;border:none;border-radius:5px;}
 </style>
 </head>
 
 <body>
 
 <header>
-<h2>IDRIS HK 2027 SITUATION ROOM</h2>
-<p>Live Kogi East Senatorial Election Dashboard</p>
+<h1>IDRIS HK 2027</h1>
+<p>Kogi East Election Situation Room</p>
 </header>
 
-<div class="card">
-<div class="total">Total Polling Units Reported: 0 / 1,754</div>
-</div>
+<div class="container">
 
-<div class="card">
-<h3>Live Votes by Local Government</h3>
+<h2>Live Polling Unit Results</h2>
+
+<button onclick="loadResults()">Refresh Results</button>
 
 <table>
+<thead>
 <tr>
 <th>LGA</th>
+<th>Ward</th>
+<th>Polling Unit</th>
 <th>SDP</th>
 <th>APC</th>
 <th>PDP</th>
 </tr>
+</thead>
 
-<tr><td>Ibaji</td><td>0</td><td>0</td><td>0</td></tr>
-<tr><td>Idah</td><td>0</td><td>0</td><td>0</td></tr>
-<tr><td>Dekina</td><td>0</td><td>0</td><td>0</td></tr>
-<tr><td>Ankpa</td><td>0</td><td>0</td><td>0</td></tr>
-<tr><td>Bassa</td><td>0</td><td>0</td><td>0</td></tr>
-<tr><td>Ofu</td><td>0</td><td>0</td><td>0</td></tr>
-<tr><td>Olamaboro</td><td>0</td><td>0</td><td>0</td></tr>
-<tr><td>Omala</td><td>0</td><td>0</td><td>0</td></tr>
-<tr><td>Igalamela/Odolu</td><td>0</td><td>0</td><td>0</td></tr>
+<tbody id="tableBody"></tbody>
 
 </table>
+
 </div>
 
-<div class="card">
-<h3>Live Result Status</h3>
-<p>🟢 Verified Results: <b>0</b></p>
-<p>🟡 Pending Results: <b>0</b></p>
-<p>🔴 Polling Units Yet to Report: <b>1,754</b></p>
-</div>
+<script>
+const supabase = window.supabase.createClient(
+  "https://unqdjgjippexmwrcwphh.supabase.co",
+  "PASTE YOUR FULL sb_publishable KEY HERE"
+);
+
+async function loadResults(){
+  const { data, error } = await supabase
+    .from("polling_results")
+    .select("*")
+    .order("created_at", { ascending:false });
+
+  if(error){
+    alert(error.message);
+    return;
+  }
+
+  let html="";
+  data.forEach(row=>{
+    html += `
+      <tr>
+        <td>${row.lga}</td>
+        <td>${row.ward}</td>
+        <td>${row.polling_unit}</td>
+        <td>${row.sdp_votes}</td>
+        <td>${row.apc_votes}</td>
+        <td>${row.pdp_votes}</td>
+      </tr>`;
+  });
+
+  document.getElementById("tableBody").innerHTML = html;
+}
+
+loadResults();
+</script>
 
 </body>
 </html>
