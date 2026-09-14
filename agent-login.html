@@ -3,43 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Polling Unit Agent Login</title>
+<title>Agent Login | IDRIS HK 2027</title>
 
 <style>
-body{
-  font-family:Arial,sans-serif;
-  background:#f2f2f2;
-  margin:0;
-}
-header{
-  background:#006400;
-  color:#fff;
-  text-align:center;
-  padding:25px;
-}
+body{font-family:Arial;background:#f4f4f4;margin:0;}
+header{background:#006400;color:white;text-align:center;padding:20px;}
+header h1{color:gold;}
 .container{
-  max-width:500px;
-  margin:30px auto;
-  background:#fff;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 2px 10px rgba(0,0,0,.2);
+max-width:500px;
+margin:30px auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
 }
 input,select{
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border:1px solid #ccc;
-  border-radius:5px;
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
 }
 button{
-  width:100%;
-  padding:14px;
-  background:#006400;
-  color:white;
-  border:none;
-  border-radius:5px;
-  font-size:18px;
+width:100%;
+padding:14px;
+background:#006400;
+color:white;
+border:none;
+border-radius:5px;
+font-size:18px;
 }
 </style>
 </head>
@@ -47,44 +39,40 @@ button{
 <body>
 
 <header>
-<h2>IDRIS HK 2027 AGENT LOGIN</h2>
-<p>Kogi East Polling Unit Agents Portal</p>
+<h1>IDRIS HK 2027</h1>
+<p>Campaign Agent Login</p>
 </header>
 
 <div class="container">
 
-<form action="upload-result.html" method="GET">
+<h2 style="color:#006400;">Login</h2>
 
-<input type="text" name="agentid"
-placeholder="Agent ID" required>
-
-<input type="password" name="password"
-placeholder="Password" required>
-
-<select name="lga" required>
-<option value="">Select Local Government</option>
-<option>Ibaji</option>
-<option>Idah</option>
-<option>Dekina</option>
-<option>Ankpa</option>
-<option>Bassa</option>
-<option>Ofu</option>
-<option>Olamaboro</option>
-<option>Omala</option>
-<option>Igalamela/Odolu</option>
+<select id="role">
+<option>Polling Unit Agent</option>
+<option>Ward Coordinator</option>
+<option>LGA Coordinator</option>
 </select>
 
-<input type="text" name="ward"
-placeholder="Ward Name" required>
+<input id="phone" type="tel" placeholder="Phone Number">
 
-<input type="text" name="pollingunit"
-placeholder="Polling Unit Name" required>
+<input id="password" type="password" placeholder="Password">
 
-<button type="submit">Login</button>
-
-</form>
+<button onclick="login()">Login</button>
 
 </div>
+
+<script>
+function login(){
+const phone=document.getElementById("phone").value;
+const password=document.getElementById("password").value;
+
+if(phone && password){
+window.location.href="agent-dashboard.html";
+}else{
+alert("Enter your phone number and password.");
+}
+}
+</script>
 
 </body>
 </html>
